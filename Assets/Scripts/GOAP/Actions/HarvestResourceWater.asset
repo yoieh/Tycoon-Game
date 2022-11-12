@@ -15,7 +15,7 @@ MonoBehaviour:
   actionName: HarvestResourceWater
   cost: 1
   targetTag: 
-  duration: 5
+  duration: 2
   preConditions: []
   afterEffects:
   - key: HasWater

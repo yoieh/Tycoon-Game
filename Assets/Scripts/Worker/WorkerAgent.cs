@@ -27,12 +27,13 @@ namespace Worker
         public void Start()
         {
             workerStats = GetComponent<WorkerStats>();
+            workerStats.TiggerAllStatsEvents();
         }
 
         // deal damage to worker
         public void WorkerHit()
         {
-            workerStats.Damage(1);
+            workerStats.HealthDecrease(1);
         }
     }
 }

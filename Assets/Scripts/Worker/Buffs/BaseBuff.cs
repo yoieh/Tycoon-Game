@@ -23,9 +23,9 @@ namespace Worker.Buffs
             return happiness;
         }
 
-        public float ModifySleep(float sleep)
+        public float ModifyEnergy(float energy)
         {
-            return sleep;
+            return energy;
         }
 
         public float ModifyWater(float water)

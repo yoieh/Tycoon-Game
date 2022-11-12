@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Worker;
+using System;
 
 public class SubGoal
 {
@@ -23,14 +24,19 @@ public class SubGoal
 
 public class GAgent : MonoBehaviour
 {
-    public event System.Action<States> agentStateChange;
+    public class OnStateChangedEventArgs : EventArgs
+    {
+        public States state;
+    }
+    public event EventHandler<OnStateChangedEventArgs> OnAgentStateChange; // event to notify damage
+
     [SerializeField] private States _state;
     public States State
     {
         get { return _state; }
         set
         {
-            agentStateChange?.Invoke(value);
+            OnAgentStateChange(this, new OnStateChangedEventArgs { state = value });
             _state = value;
         }
     }
