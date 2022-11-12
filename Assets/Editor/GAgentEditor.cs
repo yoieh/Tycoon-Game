@@ -41,6 +41,19 @@ public class GAgentVisualEditor : Editor
             foreach (KeyValuePair<string, int> sg in g.Key.sGoals)
                 GUILayout.Label("=====  " + sg.Key);
         }
+
+        GUILayout.Label("Beliefs: ");
+        foreach (KeyValuePair<string, int> b in agent.gameObject.GetComponent<GAgent>().beliefs.GetStates())
+        {
+            GUILayout.Label("====  " + b.Key + " : " + b.Value);
+        }
+
+        // GUILayout.Label("Inventory: ");
+        // foreach (KeyValuePair<string, int> i in agent.gameObject.GetComponent<GAgent>().inventory.GetStates())
+        // {
+        //     GUILayout.Label("====  " + i.Key + " : " + i.Value);
+        // }
+
         serializedObject.ApplyModifiedProperties();
     }
 }
