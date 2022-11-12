@@ -36,7 +36,7 @@ public class GAgent : MonoBehaviour
     }
 
     public List<GActionSObject> actions = new List<GActionSObject>();
-    private List<GAction> _actions = new List<GAction>();
+    [SerializeField] public List<GAction> _actions = new List<GAction>();
 
     public Dictionary<SubGoal, int> goals = new Dictionary<SubGoal, int>();
     // public Inventory inventory;
