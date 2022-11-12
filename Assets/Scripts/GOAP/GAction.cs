@@ -100,4 +100,18 @@ public class GAction
         return true;
     }
 
+    public bool WillSatisfyGiven(Dictionary<string, int> conditions)
+    {
+
+        foreach (KeyValuePair<string, int> p in effects)
+        {
+
+            if (conditions.ContainsKey(p.Key))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

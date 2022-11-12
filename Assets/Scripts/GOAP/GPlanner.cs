@@ -38,23 +38,29 @@ public class Node
 
 public class GPlanner
 {
+    public int runs = 0;
+
     public Queue<GAction> plan(List<GAction> actions, Dictionary<string, int> goal, WorldStates belifestates)
     {
-        List<GAction> usableActions = new List<GAction>();
-        foreach (GAction a in actions)
-        {
-            if (a.IsAchievable())
-                usableActions.Add(a);
-        }
+        // List<GAction> usableActions = new List<GAction>(actions);
+        // foreach (GAction a in actions)
+        // {
+        //     if (a.IsAchievable())
+        //         usableActions.Add(a);
+        // }
+
+        runs = 0;
 
         List<Node> leaves = new List<Node>();
-        Node start = new Node(null, 0, GWorld.Instance.GetWorld().GetStates(), belifestates.GetStates(), null);
 
-        bool success = BuildGraph(start, leaves, usableActions, goal);
+        Node end = new Node(null, 0, goal, null);
+        bool success = BuildGraph(end, leaves, actions, goal);
+
+        Debug.Log("BuildGraph: " + runs);
 
         if (!success)
         {
-            // Debug.Log("NO PLAN");
+            Debug.Log("NO PLAN");
             return null;
         }
 
@@ -82,7 +88,7 @@ public class GPlanner
         }
 
         Queue<GAction> queue = new Queue<GAction>();
-        foreach (GAction a in result)
+        foreach (GAction a in result.Reverse<GAction>())
         {
             queue.Enqueue(a);
         }
@@ -92,13 +98,16 @@ public class GPlanner
 
     private bool BuildGraph(Node parent, List<Node> leaves, List<GAction> usuableActions, Dictionary<string, int> goal)
     {
+        runs += 1;
+
         bool foundPath = false;
+
         foreach (GAction action in usuableActions)
         {
-            if (action.IsAchievableGiven(parent.state))
+            if (action.WillSatisfyGiven(parent.state))
             {
                 Dictionary<string, int> currentState = new Dictionary<string, int>(parent.state);
-                foreach (KeyValuePair<string, int> eff in action.effects)
+                foreach (KeyValuePair<string, int> eff in action.preconditions)
                 {
                     if (!currentState.ContainsKey(eff.Key))
                         currentState.Add(eff.Key, eff.Value);
@@ -106,7 +115,8 @@ public class GPlanner
 
                 Node node = new Node(parent, parent.cost + action.cost, currentState, action);
 
-                if (GoalAchieved(goal, currentState))
+                bool isAchievable = node.action.IsAchievableGiven(GWorld.Instance.GetWorld().GetStates());
+                if (isAchievable)
                 {
                     leaves.Add(node);
                     foundPath = true;
@@ -118,20 +128,10 @@ public class GPlanner
                     if (found)
                         foundPath = true;
                 }
-
             }
         }
-        return foundPath;
-    }
 
-    private bool GoalAchieved(Dictionary<string, int> goal, Dictionary<string, int> state)
-    {
-        foreach (KeyValuePair<string, int> g in goal)
-        {
-            if (!state.ContainsKey(g.Key))
-                return false;
-        }
-        return true;
+        return foundPath;
     }
 
     private List<GAction> ActionSubset(List<GAction> actions, GAction removeMe)
