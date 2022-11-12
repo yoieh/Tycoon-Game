@@ -49,18 +49,14 @@ public class GPlanner
         //         usableActions.Add(a);
         // }
 
-        runs = 0;
-
         List<Node> leaves = new List<Node>();
 
         Node end = new Node(null, 0, goal, null);
         bool success = BuildGraph(end, leaves, actions, goal);
 
-        Debug.Log("BuildGraph: " + runs);
-
         if (!success)
         {
-            Debug.Log("NO PLAN");
+            // Debug.Log("NO PLAN");
             return null;
         }
 
@@ -98,8 +94,6 @@ public class GPlanner
 
     private bool BuildGraph(Node parent, List<Node> leaves, List<GAction> usuableActions, Dictionary<string, int> goal)
     {
-        runs += 1;
-
         bool foundPath = false;
 
         foreach (GAction action in usuableActions)
