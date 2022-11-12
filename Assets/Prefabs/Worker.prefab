@@ -480,6 +480,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b30cf4c5f414a9c47b616418986e3cca, type: 2}
   - {fileID: 11400000, guid: 5759e4babe6518e45ab4ad6817f85013, type: 2}
   - {fileID: 11400000, guid: 55d1e51d76bc3c1469972c221299445a, type: 2}
+  - {fileID: 11400000, guid: 017e092270d98f24fa8056007c2687d2, type: 2}
+  _actions: []
   currentAction:
     target: {fileID: 0}
     destination: {x: 0, y: 0, z: 0}
