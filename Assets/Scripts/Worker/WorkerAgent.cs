@@ -26,9 +26,6 @@ namespace Worker
 
         public void Start()
         {
-            SubGoal s1 = new SubGoal("DeliveredGold", 1, false);
-            goals.Add(s1, 3);
-
             workerStats = GetComponent<WorkerStats>();
         }
 

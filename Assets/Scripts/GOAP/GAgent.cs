@@ -57,6 +57,31 @@ public class GAgent : MonoBehaviour
         }
     }
 
+    public void SetGoal(string goal, int value, int priority, bool remove)
+    {
+        goals.Clear();
+        AddGoal(goal, value, priority, remove);
+    }
+
+    public void AddGoal(string goal, int value, int priority, bool remove)
+    {
+        SubGoal subGoal = new SubGoal(goal, value, remove);
+        goals.Add(subGoal, priority);
+    }
+
+    public void ClearGoals()
+    {
+        goals.Clear();
+    }
+
+    public void ClearGoal(string goal)
+    {
+        // find goal in dictionary
+        SubGoal subGoal = goals.Keys.ToList().Find(g => g.sGoals.ContainsKey(goal));
+        // remove goal from dictionary
+        goals.Remove(subGoal);
+    }
+
     bool invoked = false;
     void ComplateAction()
     {
