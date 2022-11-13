@@ -17,7 +17,7 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4283387855
   MinHarvestAmount: 1
-  MaxHarvestAmount: 1
+  MaxHarvestAmount: 5
   HarvestTime: 3
   RegenerationTime: 10
   MaxAmount: 100

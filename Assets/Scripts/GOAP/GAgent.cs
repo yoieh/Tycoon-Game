@@ -176,10 +176,6 @@ namespace GOAP
 
         public void OnActionPreformad(GAction action)
         {
-            GameObject prefab = Instantiate(FloatingTextPrefab, transform.position, Quaternion.identity);
-            prefab.GetComponentInChildren<TMPro.TextMeshPro>().text = action.actionName;
-
-
             agentStats.PerformAction(
                     action.energyCost * action.duration,
                     action.thirstCost * action.duration,
@@ -187,6 +183,13 @@ namespace GOAP
                     action.sanityCost * action.duration,
                     action.healthCost * action.duration
                 );
+        }
+
+        public void FeedbackText(string text, Color? color = null)
+        {
+            GameObject prefab = Instantiate(FloatingTextPrefab, transform.position, Quaternion.identity);
+            prefab.GetComponentInChildren<TMPro.TextMeshPro>().text = text;
+            prefab.GetComponentInChildren<TMPro.TextMeshPro>().color = color ?? Color.white;
         }
     }
 }

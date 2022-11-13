@@ -17,7 +17,7 @@ MonoBehaviour:
   energyCost: 3
   hungerCost: 2
   thirstCost: 3
-  sanityCost: 1
+  sanityCost: 0
   healthCost: 0
   targetTag: 
   duration: 3

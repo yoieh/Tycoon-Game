@@ -33,7 +33,7 @@ namespace GOAP.Actions
         public float energyCost { get { return action.energyCost + cost; } }
         public float hungerCost { get { return action.hungerCost + cost; } }
         public float thirstCost { get { return action.thirstCost + cost; } }
-        public float sanityCost { get { return action.sanityCost + cost; } }
+        public float sanityCost { get { return action.sanityCost; } }
         public float healthCost { get { return action.healthCost; } }
 
         // For game objects with tags
