@@ -36,15 +36,23 @@ namespace GOAP.Actions
                 action.target = null;
             }
 
+            // failed to harvest
             if (harvestAmount <= 0)
             {
                 return false;
             }
 
-            agent.beliefs.ModifyState("Has" + ResourceType.ToString(), harvestAmount);
-            agent.FeedbackText("+" + harvestAmount, color);
+            // adds the item to the inventory returns false if inventory is full
+            if (agent.AddItemToInventory((ItemType)ResourceType, harvestAmount))
+            {
+                // agent.beliefs.ModifyState("Has" + ResourceType.ToString(), harvestAmount);
+                agent.FeedbackText("+" + harvestAmount, color);
 
-            return true;
+                return true;
+            }
+
+            // TODO: should drop the item on the ground if inventory is full
+            return false;
         }
     }
 }

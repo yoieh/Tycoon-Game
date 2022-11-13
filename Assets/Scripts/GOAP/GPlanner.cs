@@ -121,8 +121,7 @@ namespace GOAP
                     else
                     {
                         List<GAction> subset = ActionSubset(usuableActions, action);
-                        bool found = BuildGraph(node, leaves, subset, goal);
-                        if (found)
+                        if (BuildGraph(node, leaves, subset, goal))
                             foundPath = true;
                     }
                 }

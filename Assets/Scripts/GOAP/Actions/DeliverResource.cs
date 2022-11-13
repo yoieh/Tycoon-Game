@@ -23,10 +23,19 @@ namespace GOAP.Actions
         {
             agent.State = Worker.States.Idle;
 
-            agent.beliefs.ModifyState("Has" + ResourceType.ToString(), -1);
-            GWorld.Instance.GetWorld().ModifyState("Stored" + ResourceType.ToString(), 1);
+            ItemStack itemStack = agent.GetItemFromInventory((ItemType)ResourceType);
 
-            return true;
+            if (itemStack != null)
+            {
+                // agent.beliefs.ModifyState("Has" + ResourceType.ToString(), -1);
+                GWorld.Instance.GetWorld().ModifyState("Stored" + ResourceType.ToString(), itemStack.Amount);
+
+                agent.FeedbackText("+" + itemStack.Amount);
+
+                return true;
+            }
+
+            return false;
         }
     }
 }

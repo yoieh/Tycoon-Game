@@ -52,7 +52,7 @@ namespace GOAP
         [SerializeField] public List<GAction> _actions = new List<GAction>();
 
         public Dictionary<SubGoal, int> goals = new Dictionary<SubGoal, int>();
-        // public Inventory inventory;
+        public Inventory inventory = new Inventory();
         public WorldStates beliefs = new WorldStates();
 
         GPlanner planner;
@@ -183,6 +183,12 @@ namespace GOAP
                     action.sanityCost * action.duration,
                     action.healthCost * action.duration
                 );
+
+            if (agentStats.Energy < 100)
+            {
+                beliefs.ModifyState("IsTierd", 0);
+            }
+
         }
 
         public void FeedbackText(string text, Color? color = null)
@@ -191,5 +197,21 @@ namespace GOAP
             prefab.GetComponentInChildren<TMPro.TextMeshPro>().text = text;
             prefab.GetComponentInChildren<TMPro.TextMeshPro>().color = color ?? Color.white;
         }
+
+        public bool AddItemToInventory(ItemType itemType, int amount)
+        {
+            return inventory.SetItem(itemType, amount);
+        }
+
+        public ItemStack GetItemFromInventory(ItemType itemType, int amount)
+        {
+            return inventory.GetItem(itemType, -amount);
+        }
+
+        public ItemStack GetItemFromInventory(ItemType itemType)
+        {
+            return inventory.GetItem(itemType);
+        }
+
     }
 }

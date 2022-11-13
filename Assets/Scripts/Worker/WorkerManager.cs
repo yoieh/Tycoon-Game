@@ -74,7 +74,7 @@ namespace Worker
                 Resource.ResourceType pickedResource = (Resource.ResourceType)UnityEngine.Random.Range(0, values.Length);
 
                 workerAgent.SetGoal("Delivered" + pickedResource.ToString(), 1, 3, false);
-
+                workerAgent.SetGoal("IsRested", 1, 4, false);
 
                 AddWorker(workerAgent);
             }

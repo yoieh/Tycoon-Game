@@ -6,12 +6,12 @@ namespace Resource
 {
     public enum ResourceType
     {
-        Food,
-        Water,
-        Wood,
-        Stone,
-        Iron,
-        Gold
+        Food = ItemType.Food,
+        Water = ItemType.Water,
+        Wood = ItemType.Wood,
+        Stone = ItemType.Stone,
+        Iron = ItemType.Iron,
+        Gold = ItemType.Gold
     }
 
     public class ResourceManager : MonoBehaviourSingleton<ResourceManager>
