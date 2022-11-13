@@ -13,7 +13,12 @@ MonoBehaviour:
   m_Name: HarvestResourceWood
   m_EditorClassIdentifier: 
   actionName: HarvestResourceWood
-  cost: 1
+  cost: 5
+  energyCost: 3
+  hungerCost: 2
+  thirstCost: 3
+  sanityCost: 1
+  healthCost: 0
   targetTag: 
   duration: 5
   preConditions: []

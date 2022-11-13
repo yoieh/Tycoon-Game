@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using GOAP;
 
 // Actions
 // 0 - None
@@ -22,18 +19,16 @@ namespace Worker
     {
         public float Speed = 1f;
 
-        private WorkerStats workerStats; // reference to scriptable object asset asset
-
         public void Start()
         {
-            workerStats = GetComponent<WorkerStats>();
-            workerStats.TiggerAllStatsEvents();
+            agentStats = GetComponent<GAgentStats>();
+            agentStats.TiggerAllStatsEvents();
         }
 
         // deal damage to worker
         public void WorkerHit()
         {
-            workerStats.HealthDecrease(1);
+            agentStats.HealthDecrease(1);
         }
     }
 }

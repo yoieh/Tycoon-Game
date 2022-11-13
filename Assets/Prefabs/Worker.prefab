@@ -438,10 +438,7 @@ MonoBehaviour:
   energy: 1000
   water: 1000
   food: 1000
-  workerBuffs:
-  - {fileID: 11400000, guid: 64d663e2b50ad1a4f96871d0b0b881c1, type: 2}
-  - {fileID: 11400000, guid: b58fd1f071957e946a35120d4bee757a, type: 2}
-  - {fileID: 11400000, guid: 399068dc58d0a1446a2647b268b49f0b, type: 2}
+  workerBuffs: []
 --- !u!114 &3562416911996882249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -475,6 +472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _state: 0
+  agentStats: {fileID: 0}
   actions:
   - {fileID: 11400000, guid: 59018882e03e18540bb98160bb4ca614, type: 2}
   - {fileID: 11400000, guid: daa2ddadf14088d4c9c15ede26de85ed, type: 2}

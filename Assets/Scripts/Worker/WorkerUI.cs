@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using GOAP;
 
 namespace Worker
 {
@@ -7,7 +8,7 @@ namespace Worker
     public class WorkerUI : MonoBehaviour
     {
         [SerializeField] private WorkerAgent workerAgent;
-        [SerializeField] private WorkerStats workerStats; // reference to scriptable object asset asset
+        [SerializeField] private GAgentStats workerStats; // reference to scriptable object asset asset
 
         [SerializeField] private TextMeshProUGUI health;// text to display health
         [SerializeField] private TextMeshProUGUI happiness;// text to display happiness
@@ -35,7 +36,7 @@ namespace Worker
             }
         }
         //change health when damage is done
-        private void OnHealthChanged(object sender, WorkerStats.OnStatChangedEventArgs e)
+        private void OnHealthChanged(object sender, GAgentStats.OnStatChangedEventArgs e)
         {
             if (health != null)
             {
@@ -43,7 +44,7 @@ namespace Worker
             }
         }
         //change happiness when happiness is changed
-        private void OnHappinessChanged(object sender, WorkerStats.OnStatChangedEventArgs e)
+        private void OnHappinessChanged(object sender, GAgentStats.OnStatChangedEventArgs e)
         {
             if (happiness != null)
             {
@@ -51,7 +52,7 @@ namespace Worker
             }
         }
         //change energy when energy is changed
-        private void OnEnergyChanged(object sender, WorkerStats.OnStatChangedEventArgs e)
+        private void OnEnergyChanged(object sender, GAgentStats.OnStatChangedEventArgs e)
         {
             if (energy != null)
             {
@@ -59,7 +60,7 @@ namespace Worker
             }
         }
         //change water when water is changed
-        private void OnWaterChanged(object sender, WorkerStats.OnStatChangedEventArgs e)
+        private void OnWaterChanged(object sender, GAgentStats.OnStatChangedEventArgs e)
         {
             if (water != null)
             {
@@ -67,7 +68,7 @@ namespace Worker
             }
         }
         //change food when food is changed
-        private void OnFoodChanged(object sender, WorkerStats.OnStatChangedEventArgs e)
+        private void OnFoodChanged(object sender, GAgentStats.OnStatChangedEventArgs e)
         {
             if (food != null)
             {

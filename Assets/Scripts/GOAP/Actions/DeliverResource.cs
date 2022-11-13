@@ -3,27 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using Resource;
 
-[CreateAssetMenu(fileName = "DeliverResourceNAME", menuName = "Actoins/DeliverResource")]
-public class DeliverResource : GActionSObject
+namespace GOAP
 {
-    public ResourceType ResourceType;
-
-    public override bool PrePerform(GAgent agent, GAction action)
+    [CreateAssetMenu(fileName = "DeliverResourceNAME", menuName = "Actoins/DeliverResource")]
+    public class DeliverResource : GActionSObject
     {
-        agent.State = Worker.States.MoveTo;
+        public ResourceType ResourceType;
 
-        // action.target = find storage building
+        public override bool PrePerform(GAgent agent, GAction action)
+        {
+            agent.State = Worker.States.MoveTo;
 
-        return true;
-    }
+            // action.target = find storage building
 
-    public override bool PostPerform(GAgent agent, GAction action)
-    {
-        agent.State = Worker.States.Idle;
+            return true;
+        }
 
-        agent.beliefs.ModifyState("Has" + ResourceType.ToString(), -1);
-        GWorld.Instance.GetWorld().ModifyState("Stored" + ResourceType.ToString(), 1);
+        public override bool PostPerform(GAgent agent, GAction action)
+        {
+            agent.State = Worker.States.Idle;
 
-        return true;
+            agent.beliefs.ModifyState("Has" + ResourceType.ToString(), -1);
+            GWorld.Instance.GetWorld().ModifyState("Stored" + ResourceType.ToString(), 1);
+
+            return true;
+        }
     }
 }

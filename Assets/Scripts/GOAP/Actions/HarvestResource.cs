@@ -4,29 +4,32 @@ using UnityEngine;
 using Resource;
 using System.Linq;
 
-[CreateAssetMenu(fileName = "HarvestResourceNAME", menuName = "Actoins/HarvestResource")]
-public class HarvestResource : GActionSObject
+namespace GOAP
 {
-    public ResourceType ResourceType;
-
-    public override bool PrePerform(GAgent agent, GAction action)
+    [CreateAssetMenu(fileName = "HarvestResourceNAME", menuName = "Actoins/HarvestResource")]
+    public class HarvestResource : GActionSObject
     {
-        agent.State = Worker.States.MoveTo;
+        public ResourceType ResourceType;
 
-        if (action.target == null)
+        public override bool PrePerform(GAgent agent, GAction action)
         {
-            action.target = ResourceManager.Instance.GetClosestResourceSourceOfType(ResourceType, agent.transform.position).gameObject;
+            agent.State = Worker.States.MoveTo;
+
+            if (action.target == null)
+            {
+                action.target = ResourceManager.Instance.GetClosestResourceSourceOfType(ResourceType, agent.transform.position).gameObject;
+            }
+
+            return true;
         }
 
-        return true;
-    }
+        public override bool PostPerform(GAgent agent, GAction action)
+        {
+            agent.State = Worker.States.Idle;
 
-    public override bool PostPerform(GAgent agent, GAction action)
-    {
-        agent.State = Worker.States.Idle;
+            agent.beliefs.ModifyState("Has" + ResourceType.ToString(), 1);
 
-        agent.beliefs.ModifyState("Has" + ResourceType.ToString(), 1);
-
-        return true;
+            return true;
+        }
     }
 }

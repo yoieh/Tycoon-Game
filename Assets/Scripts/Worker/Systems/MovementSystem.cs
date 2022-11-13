@@ -18,6 +18,7 @@ namespace Worker.Systems
             {
                 if (worker.currentAction == null) continue;
                 if (!worker.currentAction.running) continue;
+                if (worker.agentStats.Energy <= 0) continue;
 
                 // get worker's transform
                 Transform workerTransform = worker.transform;

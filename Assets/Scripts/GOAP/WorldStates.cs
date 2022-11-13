@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 
+namespace GOAP
+{
 [System.Serializable]
 public class WorldState {
 
@@ -76,4 +78,5 @@ public class WorldStates {
 
         return states;
     }
+}
 }

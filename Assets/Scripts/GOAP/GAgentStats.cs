@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Worker
+namespace GOAP
 {
-    using Buffs;
+    using Worker.Buffs;
 
-    public class WorkerStats : MonoBehaviour
+    public class GAgentStats : MonoBehaviour
     {
         // properties of character
         [SerializeField] private float health;
@@ -58,11 +58,11 @@ namespace Worker
 
         public void TiggerAllStatsEvents()
         {
-            OnHealthChanged(this, new OnStatChangedEventArgs { value = this.health });
-            OnHappinessChanged(this, new OnStatChangedEventArgs { value = this.happiness });
-            OnEnergyChanged(this, new OnStatChangedEventArgs { value = this.energy });
-            OnWaterChanged(this, new OnStatChangedEventArgs { value = this.water });
-            OnFoodChanged(this, new OnStatChangedEventArgs { value = this.food });
+            if (OnHealthChanged != null) OnHealthChanged(this, new OnStatChangedEventArgs { value = this.health });
+            if (OnHappinessChanged != null) OnHappinessChanged(this, new OnStatChangedEventArgs { value = this.happiness });
+            if (OnEnergyChanged != null) OnEnergyChanged(this, new OnStatChangedEventArgs { value = this.energy });
+            if (OnWaterChanged != null) OnWaterChanged(this, new OnStatChangedEventArgs { value = this.water });
+            if (OnFoodChanged != null) OnFoodChanged(this, new OnStatChangedEventArgs { value = this.food });
         }
 
         public void HealthIncrease(float health)
@@ -75,8 +75,8 @@ namespace Worker
 
             // heal health
             this.health += health;
-            OnHealthDecrease(this, new OnStatChangedEventArgs { value = this.health });
-            OnHealthChanged(this, new OnStatChangedEventArgs { value = this.health });
+            if (OnHealthIncrease != null) OnHealthIncrease(this, new OnStatChangedEventArgs { value = Health });
+            if (OnHealthChanged != null) OnHealthChanged(this, new OnStatChangedEventArgs { value = Health });
         }
 
         // Deal damage, damage will be reduced by armour
@@ -90,8 +90,8 @@ namespace Worker
 
             // damage health
             this.health -= health;
-            OnHealthIncrease(this, new OnStatChangedEventArgs { value = this.health });
-            OnHealthChanged(this, new OnStatChangedEventArgs { value = this.health });
+            if (OnHealthDecrease != null) OnHealthDecrease(this, new OnStatChangedEventArgs { value = Health });
+            if (OnHealthChanged != null) OnHealthChanged(this, new OnStatChangedEventArgs { value = Health });
         }
 
         public void HappinessIncrease(float happiness)
@@ -104,8 +104,8 @@ namespace Worker
 
             // modify happiness
             this.happiness += happiness;
-            OnHappinessIncrease(this, new OnStatChangedEventArgs { value = this.happiness });
-            OnHappinessChanged(this, new OnStatChangedEventArgs { value = this.happiness });
+            if (OnHappinessIncrease != null) OnHappinessIncrease(this, new OnStatChangedEventArgs { value = this.happiness });
+            if (OnHappinessChanged != null) OnHappinessChanged(this, new OnStatChangedEventArgs { value = this.happiness });
         }
 
         public void HappinessDecrease(float happiness)
@@ -118,8 +118,8 @@ namespace Worker
 
             // modify happiness
             this.happiness -= happiness;
-            OnHappinessDecrease(this, new OnStatChangedEventArgs { value = this.happiness });
-            OnHappinessChanged(this, new OnStatChangedEventArgs { value = this.happiness });
+            if (OnHappinessDecrease != null) OnHappinessDecrease(this, new OnStatChangedEventArgs { value = this.happiness });
+            if (OnHappinessChanged != null) OnHappinessChanged(this, new OnStatChangedEventArgs { value = this.happiness });
         }
 
         public void EnergyIncrease(float energy)
@@ -132,8 +132,8 @@ namespace Worker
 
             // modify energy
             this.energy += energy;
-            OnEnergyIncrease(this, new OnStatChangedEventArgs { value = this.energy });
-            OnEnergyChanged(this, new OnStatChangedEventArgs { value = this.energy });
+            if (OnEnergyIncrease != null) OnEnergyIncrease(this, new OnStatChangedEventArgs { value = this.energy });
+            if (OnEnergyChanged != null) OnEnergyChanged(this, new OnStatChangedEventArgs { value = this.energy });
         }
 
         public void EnergyDecrease(float energy)
@@ -146,8 +146,8 @@ namespace Worker
 
             // modify energy
             this.energy -= energy;
-            OnEnergyDecrease(this, new OnStatChangedEventArgs { value = this.energy });
-            OnEnergyChanged(this, new OnStatChangedEventArgs { value = this.energy });
+            if (OnEnergyDecrease != null) OnEnergyDecrease(this, new OnStatChangedEventArgs { value = this.energy });
+            if (OnEnergyChanged != null) OnEnergyChanged(this, new OnStatChangedEventArgs { value = this.energy });
         }
 
         public void WaterIncrease(float water)
@@ -160,8 +160,8 @@ namespace Worker
 
             // modify water
             this.water += water;
-            OnWaterIncrease(this, new OnStatChangedEventArgs { value = this.water });
-            OnWaterChanged(this, new OnStatChangedEventArgs { value = this.water });
+            if (OnWaterIncrease != null) OnWaterIncrease(this, new OnStatChangedEventArgs { value = this.water });
+            if (OnWaterChanged != null) OnWaterChanged(this, new OnStatChangedEventArgs { value = this.water });
         }
 
         public void WaterDecrease(float water)
@@ -174,8 +174,8 @@ namespace Worker
 
             // modify water
             this.water -= water;
-            OnWaterDecrease(this, new OnStatChangedEventArgs { value = this.water });
-            OnWaterChanged(this, new OnStatChangedEventArgs { value = this.water });
+            if (OnWaterDecrease != null) OnWaterDecrease(this, new OnStatChangedEventArgs { value = this.water });
+            if (OnWaterChanged != null) OnWaterChanged(this, new OnStatChangedEventArgs { value = this.water });
         }
 
         public void FoodIncrease(float food)
@@ -188,8 +188,8 @@ namespace Worker
 
             // modify food
             this.food += food;
-            OnFoodIncrease(this, new OnStatChangedEventArgs { value = this.food });
-            OnFoodChanged(this, new OnStatChangedEventArgs { value = this.food });
+            if (OnFoodIncrease != null) OnFoodIncrease(this, new OnStatChangedEventArgs { value = this.food });
+            if (OnFoodChanged != null) OnFoodChanged(this, new OnStatChangedEventArgs { value = this.food });
         }
 
         public void FoodDecrease(float food)
@@ -202,8 +202,8 @@ namespace Worker
 
             // modify food
             this.food -= food;
-            OnFoodDecrease(this, new OnStatChangedEventArgs { value = this.food });
-            OnFoodChanged(this, new OnStatChangedEventArgs { value = this.food });
+            if (OnFoodDecrease != null) OnFoodDecrease(this, new OnStatChangedEventArgs { value = this.food });
+            if (OnFoodChanged != null) OnFoodChanged(this, new OnStatChangedEventArgs { value = this.food });
         }
 
         public void PerformAction(float energy = 0, float water = 0, float food = 0, float happiness = 0, float health = 0)
@@ -212,16 +212,17 @@ namespace Worker
             EnergyDecrease(energy);
             FoodDecrease(food);
             WaterDecrease(water);
-            HappinessIncrease(happiness);
+            HappinessDecrease(happiness);
 
-            OnPerformAction(this, new OnPreformActionEventArgs
-            {
-                energy = energy,
-                water = water,
-                food = food,
-                happiness = happiness,
-                health = health
-            });
+            if (OnPerformAction != null)
+                OnPerformAction(this, new OnPreformActionEventArgs
+                {
+                    energy = energy,
+                    water = water,
+                    food = food,
+                    happiness = happiness,
+                    health = health
+                });
         }
     }
 }

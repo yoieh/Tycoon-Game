@@ -1,24 +1,32 @@
-﻿public sealed class GWorld {
+﻿namespace GOAP
+{
+    public sealed class GWorld
+    {
 
-    private static readonly GWorld instance = new GWorld();
-    private static WorldStates world;
+        private static readonly GWorld instance = new GWorld();
+        private static WorldStates world;
 
-    static GWorld() {
+        static GWorld()
+        {
 
-        world = new WorldStates();
-    }
+            world = new WorldStates();
+        }
 
-    private GWorld() {
+        private GWorld()
+        {
 
-    }
+        }
 
-    public static GWorld Instance {
+        public static GWorld Instance
+        {
 
-        get { return instance; }
-    }
+            get { return instance; }
+        }
 
-    public WorldStates GetWorld() {
+        public WorldStates GetWorld()
+        {
 
-        return world;
+            return world;
+        }
     }
 }
