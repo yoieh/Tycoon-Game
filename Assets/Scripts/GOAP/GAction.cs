@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GOAP
+namespace GOAP.Actions
 {
     [Serializable]
     public class GAction

@@ -1,10 +1,11 @@
 using UnityEngine;
+using GOAP.Stats.Buffs;
 
 namespace Worker.Buffs
 {
     // decreases damage
     [CreateAssetMenu(fileName = "Armor", menuName = "Worker/Buffs/Armor")]
-    public class ArmorBuff : BaseBuff
+    public class ArmorBuff : GBaseBuff
     {
         public float armor;
         public new float ModifyDamage(float damage)

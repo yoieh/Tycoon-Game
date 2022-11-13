@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GOAP
+namespace GOAP.Stats
 {
-    using Worker.Buffs;
+    using Buffs;
 
     public class GAgentStats : MonoBehaviour
     {
@@ -54,7 +54,7 @@ namespace GOAP
         public event EventHandler<OnStatChangedEventArgs> OnFoodChanged; // event to notify food change
 
 
-        public List<BaseBuff> workerBuffs;
+        public List<GBaseBuff> workerBuffs;
 
         public void TiggerAllStatsEvents()
         {
@@ -68,7 +68,7 @@ namespace GOAP
         public void HealthIncrease(float health)
         {
             // modify healing according to each buff
-            foreach (BaseBuff buff in workerBuffs)
+            foreach (GBaseBuff buff in workerBuffs)
             {
                 health = buff.ModifyHealing(health);
             }
@@ -83,7 +83,7 @@ namespace GOAP
         public void HealthDecrease(float health)
         {
             // modify damage according to each buff
-            foreach (BaseBuff buff in workerBuffs)
+            foreach (GBaseBuff buff in workerBuffs)
             {
                 health = buff.ModifyDamage(health);
             }
@@ -97,7 +97,7 @@ namespace GOAP
         public void HappinessIncrease(float happiness)
         {
             // modify happiness according to each buff
-            foreach (BaseBuff buff in workerBuffs)
+            foreach (GBaseBuff buff in workerBuffs)
             {
                 happiness = buff.ModifyHappiness(happiness);
             }
@@ -111,7 +111,7 @@ namespace GOAP
         public void HappinessDecrease(float happiness)
         {
             // modify happiness according to each buff
-            foreach (BaseBuff buff in workerBuffs)
+            foreach (GBaseBuff buff in workerBuffs)
             {
                 happiness = buff.ModifyHappiness(happiness);
             }
@@ -125,7 +125,7 @@ namespace GOAP
         public void EnergyIncrease(float energy)
         {
             // modify energy according to each buff
-            foreach (BaseBuff buff in workerBuffs)
+            foreach (GBaseBuff buff in workerBuffs)
             {
                 energy = buff.ModifyEnergy(energy);
             }
@@ -139,7 +139,7 @@ namespace GOAP
         public void EnergyDecrease(float energy)
         {
             // modify energy according to each buff
-            foreach (BaseBuff buff in workerBuffs)
+            foreach (GBaseBuff buff in workerBuffs)
             {
                 energy = buff.ModifyEnergy(energy);
             }
@@ -153,7 +153,7 @@ namespace GOAP
         public void WaterIncrease(float water)
         {
             // modify water according to each buff
-            foreach (BaseBuff buff in workerBuffs)
+            foreach (GBaseBuff buff in workerBuffs)
             {
                 water = buff.ModifyWater(water);
             }
@@ -167,7 +167,7 @@ namespace GOAP
         public void WaterDecrease(float water)
         {
             // modify water according to each buff
-            foreach (BaseBuff buff in workerBuffs)
+            foreach (GBaseBuff buff in workerBuffs)
             {
                 water = buff.ModifyWater(water);
             }
@@ -181,7 +181,7 @@ namespace GOAP
         public void FoodIncrease(float food)
         {
             // modify food according to each buff
-            foreach (BaseBuff buff in workerBuffs)
+            foreach (GBaseBuff buff in workerBuffs)
             {
                 food = buff.ModifyFood(food);
             }
@@ -195,7 +195,7 @@ namespace GOAP
         public void FoodDecrease(float food)
         {
             // modify food according to each buff
-            foreach (BaseBuff buff in workerBuffs)
+            foreach (GBaseBuff buff in workerBuffs)
             {
                 food = buff.ModifyFood(food);
             }

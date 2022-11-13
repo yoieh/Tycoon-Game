@@ -1,6 +1,6 @@
 using TMPro;
 using UnityEngine;
-using GOAP;
+using GOAP.Stats;
 
 namespace Worker
 {

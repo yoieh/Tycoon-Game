@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace GOAP
 {
+    using Actions;
     public abstract class GActionSObject : ScriptableObject
     {
 

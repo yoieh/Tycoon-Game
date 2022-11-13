@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Resource;
 
-namespace GOAP
+namespace GOAP.Actions
 {
     [CreateAssetMenu(fileName = "DeliverResourceNAME", menuName = "Actoins/DeliverResource")]
     public class DeliverResource : GActionSObject

@@ -1,10 +1,11 @@
 using UnityEngine;
+using GOAP.Stats.Buffs;
 
 namespace Worker.Buffs
 {
     // this buff heals amount equal to damage
     [CreateAssetMenu(fileName = "Healing", menuName = "Worker/Buffs/Healing")]
-    public class HealingBuff : BaseBuff
+    public class HealingBuff : GBaseBuff
     {
         public new float ModifyDamage(float damage)
         {

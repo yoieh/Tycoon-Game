@@ -4,7 +4,7 @@ using UnityEngine;
 using Resource;
 using System.Linq;
 
-namespace GOAP
+namespace GOAP.Actions
 {
     [CreateAssetMenu(fileName = "HarvestResourceNAME", menuName = "Actoins/HarvestResource")]
     public class HarvestResource : GActionSObject

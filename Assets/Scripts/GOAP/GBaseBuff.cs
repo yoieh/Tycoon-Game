@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Worker.Buffs
+namespace GOAP.Stats.Buffs
 {
     // abstract class to implement buff
-    public class BaseBuff : ScriptableObject
+    public class GBaseBuff : ScriptableObject
     {
         // modifies damage dealt
         public float ModifyDamage(float damage)

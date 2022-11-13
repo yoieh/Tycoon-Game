@@ -471,6 +471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d4a3d33c14c674ab5bdc04e43094ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FloatingTextPrefab: {fileID: 6219400684990185284, guid: 2e0c097b0a4f845468f15d481631b098, type: 3}
   _state: 0
   agentStats: {fileID: 0}
   actions:

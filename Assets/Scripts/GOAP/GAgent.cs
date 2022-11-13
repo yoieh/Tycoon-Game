@@ -6,6 +6,9 @@ using System;
 
 namespace GOAP
 {
+    using Stats;
+    using Actions;
+
     public class SubGoal
     {
 
@@ -32,6 +35,7 @@ namespace GOAP
         }
         public event EventHandler<OnStateChangedEventArgs> OnAgentStateChange; // event to notify damage
 
+        [SerializeField] private GameObject FloatingTextPrefab;
         [SerializeField] private States _state;
         public States State
         {
@@ -50,7 +54,6 @@ namespace GOAP
         public Dictionary<SubGoal, int> goals = new Dictionary<SubGoal, int>();
         // public Inventory inventory;
         public WorldStates beliefs = new WorldStates();
-
 
         GPlanner planner;
         Queue<GAction> actionQueue;
@@ -173,6 +176,10 @@ namespace GOAP
 
         public void OnActionPreformad(GAction action)
         {
+            GameObject prefab = Instantiate(FloatingTextPrefab, transform.position, Quaternion.identity);
+            prefab.GetComponentInChildren<TMPro.TextMeshPro>().text = action.actionName;
+
+
             agentStats.PerformAction(
                     action.energyCost * action.duration,
                     action.thirstCost * action.duration,

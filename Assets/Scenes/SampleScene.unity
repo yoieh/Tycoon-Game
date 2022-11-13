@@ -1602,7 +1602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116323b534bc66b4484789f5f315721a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnAmount: 300
+  spawnAmount: 10
   workerPrefab: {fileID: 7535937766329576873, guid: 0b32ad13916788d4388eed70f6d330be, type: 3}
 --- !u!1 &1473754278
 GameObject:

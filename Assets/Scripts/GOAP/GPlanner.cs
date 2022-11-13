@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace GOAP
 {
+    using Actions;
     public class Node
     {
         public Node parent;
