@@ -59,7 +59,12 @@ namespace GOAP
 
             if (!success)
             {
-                // Debug.Log("NO PLAN");
+                string goals = "";
+                foreach (KeyValuePair<string, int> g in goal)
+                {
+                    goals += g.Key + " : " + g.Value + ", ";
+                }
+                Debug.Log("NO PLAN" + goals);
                 return null;
             }
 

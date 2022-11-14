@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: Rest
   cost: 1
-  energyCost: -12
+  energyCost: 0
   hungerCost: 0
   thirstCost: 0
   sanityCost: 0
   healthCost: 0
   targetTag: 
-  duration: 50
+  duration: 5
   preConditions:
-  - key: IsTierd
+  - key: 'IsTired '
     value: 1
   afterEffects:
-  - key: IsRested
-    value: 0
+  - key: HasRested
+    value: 1
