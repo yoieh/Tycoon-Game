@@ -76,9 +76,6 @@ namespace Worker
                 workerAgent.AddGoal("HasRested", 1, 10, false);
                 workerAgent.AddGoal("Delivered" + pickedResource.ToString(), 1, 3, false);
 
-                workerAgent.beliefs.SetState("IsTired", 1);
-
-
                 AddWorker(workerAgent);
             }
         }
