@@ -23,6 +23,6 @@ MonoBehaviour:
   duration: 5
   preConditions: []
   afterEffects:
-  - key: HasWood
+  - key: 11
     value: 1
   ResourceType: 2

@@ -23,6 +23,6 @@ MonoBehaviour:
   duration: 2
   preConditions: []
   afterEffects:
-  - key: HasWater
+  - key: 9
     value: 1
   ResourceType: 1

@@ -13,15 +13,15 @@ namespace GOAP
     {
 
         // Dictionary to store our goals
-        public Dictionary<string, int> sGoals;
+        public Dictionary<WorldStateTypes, int> sGoals;
         // Bool to store if goal should be removed
         public bool remove;
 
         // Constructor
-        public SubGoal(string s, int i, bool r = true)
+        public SubGoal(WorldStateTypes s, int i, bool r = true)
         {
 
-            sGoals = new Dictionary<string, int>();
+            sGoals = new Dictionary<WorldStateTypes, int>();
             sGoals.Add(s, i);
             remove = r;
         }
@@ -69,13 +69,13 @@ namespace GOAP
             }
         }
 
-        public void SetGoal(string goal, int value, int priority, bool remove)
+        public void SetGoal(WorldStateTypes goal, int value, int priority, bool remove)
         {
             goals.Clear();
             AddGoal(goal, value, priority, remove);
         }
 
-        public void AddGoal(string goal, int value, int priority, bool remove)
+        public void AddGoal(WorldStateTypes goal, int value, int priority, bool remove)
         {
             SubGoal subGoal = new SubGoal(goal, value, remove);
             goals.Add(subGoal, priority);
@@ -86,7 +86,7 @@ namespace GOAP
             goals.Clear();
         }
 
-        public void ClearGoal(string goal)
+        public void ClearGoal(WorldStateTypes goal)
         {
             // find goal in dictionary
             SubGoal subGoal = goals.Keys.ToList().Find(g => g.sGoals.ContainsKey(goal));
@@ -186,7 +186,7 @@ namespace GOAP
 
             if (agentStats.Energy < 100)
             {
-                beliefs.SetState("IsTired", 1);
+                beliefs.SetState(WorldStateTypes.IsTired, 1);
             }
 
         }

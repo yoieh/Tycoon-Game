@@ -28,7 +28,9 @@ namespace GOAP.Actions
             if (itemStack != null)
             {
                 // agent.beliefs.ModifyState("Has" + ResourceType.ToString(), -1);
-                GWorld.Instance.GetWorld().ModifyState("Stored" + ResourceType.ToString(), itemStack.Amount);
+                
+                // WorldStateTypes stateType = WorldState.ByName("Stored" + ResourceType.ToString());
+                // GWorld.Instance.GetWorld().ModifyState(stateType, itemStack.Amount);
 
                 agent.FeedbackText("+" + itemStack.Amount);
 

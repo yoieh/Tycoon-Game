@@ -11,9 +11,9 @@ namespace GOAP.Actions
         public GameObject target;
         public Vector3 destination;
         // Dictionary of preconditions
-        public Dictionary<string, int> preconditions;
+        public Dictionary<WorldStateTypes, int> preconditions;
         // Dictionary of effects
-        public Dictionary<string, int> effects;
+        public Dictionary<WorldStateTypes, int> effects;
 
         // public Inventory inventory;
 
@@ -47,8 +47,8 @@ namespace GOAP.Actions
             this.action = action;
 
             // Set up the preconditions and effects
-            preconditions = new Dictionary<string, int>();
-            effects = new Dictionary<string, int>();
+            preconditions = new Dictionary<WorldStateTypes, int>();
+            effects = new Dictionary<WorldStateTypes, int>();
 
             // Check validity of preConditions
             if (action.preConditions != null)
@@ -102,10 +102,10 @@ namespace GOAP.Actions
             return true;
         }
 
-        public bool IsAchievableGiven(Dictionary<string, int> conditions)
+        public bool IsAchievableGiven(Dictionary<WorldStateTypes, int> conditions)
         {
 
-            foreach (KeyValuePair<string, int> p in preconditions)
+            foreach (KeyValuePair<WorldStateTypes, int> p in preconditions)
             {
 
                 if (!conditions.ContainsKey(p.Key))
@@ -117,10 +117,10 @@ namespace GOAP.Actions
             return true;
         }
 
-        public bool WillSatisfyGiven(Dictionary<string, int> conditions)
+        public bool WillSatisfyGiven(Dictionary<WorldStateTypes, int> conditions)
         {
 
-            foreach (KeyValuePair<string, int> p in effects)
+            foreach (KeyValuePair<WorldStateTypes, int> p in effects)
             {
 
                 if (conditions.ContainsKey(p.Key))

@@ -23,6 +23,6 @@ MonoBehaviour:
   duration: 30
   preConditions: []
   afterEffects:
-  - key: HasGold
+  - key: 3
     value: 1
   ResourceType: 5

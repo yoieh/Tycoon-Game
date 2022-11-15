@@ -73,8 +73,10 @@ namespace Worker
                 var values = Enum.GetValues(typeof(Resource.ResourceType));
                 Resource.ResourceType pickedResource = (Resource.ResourceType)UnityEngine.Random.Range(0, values.Length);
 
-                workerAgent.AddGoal("HasRested", 1, 10, false);
-                workerAgent.AddGoal("Delivered" + pickedResource.ToString(), 1, 3, false);
+                WorldStateTypes deliveredGoal = WorldState.ByName("Delivered" + pickedResource.ToString());
+
+                workerAgent.AddGoal(WorldStateTypes.HasRested, 1, 10, false);
+                workerAgent.AddGoal(deliveredGoal, 1, 3, false);
 
                 AddWorker(workerAgent);
             }

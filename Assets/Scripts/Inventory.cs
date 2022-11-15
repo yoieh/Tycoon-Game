@@ -127,7 +127,11 @@ public class Inventory
         WorldStates states = new WorldStates();
         foreach (var item in _itemsSlots)
         {
-            if (item.Value > 0) states.SetState("Has" + item.ToString(), item.Value.Amount);
+            if (item.Value > 0)
+            {
+                WorldStateTypes stateType = WorldState.ByName("Has" + item.ToString());
+                states.SetState(stateType, item.Value.Amount);
+            }
         }
 
         return states;

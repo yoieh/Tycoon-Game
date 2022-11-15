@@ -23,6 +23,6 @@ MonoBehaviour:
   duration: 20
   preConditions: []
   afterEffects:
-  - key: HasIron
+  - key: 5
     value: 1
   ResourceType: 4

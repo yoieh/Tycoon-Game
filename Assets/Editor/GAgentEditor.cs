@@ -28,9 +28,9 @@ public class GAgentVisualEditor : Editor
             string pre = "";
             string eff = "";
 
-            foreach (KeyValuePair<string, int> p in a.preconditions)
+            foreach (KeyValuePair<WorldStateTypes, int> p in a.preconditions)
                 pre += p.Key + ", ";
-            foreach (KeyValuePair<string, int> e in a.effects)
+            foreach (KeyValuePair<WorldStateTypes, int> e in a.effects)
                 eff += e.Key + ", ";
 
             GUILayout.Label("====  " + a.actionName + "(" + pre + ")(" + eff + ")");
@@ -39,12 +39,12 @@ public class GAgentVisualEditor : Editor
         foreach (KeyValuePair<SubGoal, int> g in agent.gameObject.GetComponent<GAgent>().goals)
         {
             GUILayout.Label("---: ");
-            foreach (KeyValuePair<string, int> sg in g.Key.sGoals)
+            foreach (KeyValuePair<WorldStateTypes, int> sg in g.Key.sGoals)
                 GUILayout.Label("=====  " + sg.Key);
         }
 
         GUILayout.Label("Beliefs: ");
-        foreach (KeyValuePair<string, int> b in agent.gameObject.GetComponent<GAgent>().beliefs.GetStates())
+        foreach (KeyValuePair<WorldStateTypes, int> b in agent.gameObject.GetComponent<GAgent>().beliefs.GetStates())
         {
             GUILayout.Label("====  " + b.Key + " : " + b.Value);
         }

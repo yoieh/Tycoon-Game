@@ -21,8 +21,8 @@ namespace GOAP.Actions
         {
             agent.State = Worker.States.Idle;
 
-            agent.FeedbackText("HasRested");
-            agent.beliefs.ModifyState("IsTired", -1);
+            agent.FeedbackText(WorldStateTypes.HasRested.ToString());
+            agent.beliefs.ModifyState(WorldStateTypes.IsTired, -1);
 
             return true;
         }

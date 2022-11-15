@@ -22,9 +22,9 @@ MonoBehaviour:
   targetTag: 
   duration: 0
   preConditions:
-  - key: HasStone
+  - key: 7
     value: 1
   afterEffects:
-  - key: DeliveredStone
+  - key: 8
     value: 1
   ResourceType: 3

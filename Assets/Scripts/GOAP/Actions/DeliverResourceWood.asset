@@ -22,9 +22,9 @@ MonoBehaviour:
   targetTag: 
   duration: 0
   preConditions:
-  - key: HasWood
+  - key: 11
     value: 1
   afterEffects:
-  - key: DeliveredWood
+  - key: 12
     value: 1
   ResourceType: 2

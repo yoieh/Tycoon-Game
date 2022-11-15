@@ -10,24 +10,24 @@ namespace GOAP
     {
         public Node parent;
         public float cost;
-        public Dictionary<string, int> state;
+        public Dictionary<WorldStateTypes, int> state;
         public GAction action;
 
-        public Node(Node parent, float cost, Dictionary<string, int> allstates, GAction action)
+        public Node(Node parent, float cost, Dictionary<WorldStateTypes, int> allstates, GAction action)
         {
             this.parent = parent;
             this.cost = cost;
-            this.state = new Dictionary<string, int>(allstates);
+            this.state = new Dictionary<WorldStateTypes, int>(allstates);
             this.action = action;
         }
 
-        public Node(Node parent, float cost, Dictionary<string, int> allstates, Dictionary<string, int> beliefstates, GAction action)
+        public Node(Node parent, float cost, Dictionary<WorldStateTypes, int> allstates, Dictionary<WorldStateTypes, int> beliefstates, GAction action)
         {
             this.parent = parent;
             this.cost = cost;
-            this.state = new Dictionary<string, int>(allstates);
+            this.state = new Dictionary<WorldStateTypes, int>(allstates);
 
-            foreach (KeyValuePair<string, int> b in beliefstates)
+            foreach (KeyValuePair<WorldStateTypes, int> b in beliefstates)
             {
                 if (!this.state.ContainsKey(b.Key))
                 {
@@ -43,7 +43,7 @@ namespace GOAP
     {
         public int runs = 0;
 
-        public Queue<GAction> plan(List<GAction> actions, Dictionary<string, int> goal, WorldStates belifestates)
+        public Queue<GAction> plan(List<GAction> actions, Dictionary<WorldStateTypes, int> goal, WorldStates belifestates)
         {
             // List<GAction> usableActions = new List<GAction>(actions);
             // foreach (GAction a in actions)
@@ -100,7 +100,7 @@ namespace GOAP
             return queue;
         }
 
-        private bool BuildGraph(Node parent, List<Node> leaves, List<GAction> usuableActions, Dictionary<string, int> goal, WorldStates beliefs)
+        private bool BuildGraph(Node parent, List<Node> leaves, List<GAction> usuableActions, Dictionary<WorldStateTypes, int> goal, WorldStates beliefs)
         {
             bool foundPath = false;
 
@@ -108,8 +108,8 @@ namespace GOAP
             {
                 if (action.WillSatisfyGiven(parent.state))
                 {
-                    Dictionary<string, int> currentState = new Dictionary<string, int>(parent.state);
-                    foreach (KeyValuePair<string, int> eff in action.preconditions)
+                    Dictionary<WorldStateTypes, int> currentState = new Dictionary<WorldStateTypes, int>(parent.state);
+                    foreach (KeyValuePair<WorldStateTypes, int> eff in action.preconditions)
                     {
                         if (!currentState.ContainsKey(eff.Key))
                             currentState.Add(eff.Key, eff.Value);

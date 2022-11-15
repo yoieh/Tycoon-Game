@@ -23,6 +23,6 @@ MonoBehaviour:
   duration: 10
   preConditions: []
   afterEffects:
-  - key: HasStone
+  - key: 7
     value: 1
   ResourceType: 3

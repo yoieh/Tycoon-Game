@@ -23,6 +23,6 @@ MonoBehaviour:
   duration: 3
   preConditions: []
   afterEffects:
-  - key: HasFood
+  - key: 1
     value: 1
   ResourceType: 0

@@ -1,42 +1,71 @@
 ﻿using System.Collections.Generic;
 
 
-[System.Serializable]
-public class WorldState
+public enum WorldStateTypes
 {
+    None,
 
-    public string key;
+    HasFood,
+    DeliveredFood,
+    HasGold,
+    DeliveredGold,
+    HasIron,
+    DeliveredIron,
+    HasStone,
+    DeliveredStone,
+    HasWater,
+    DeliveredWater,
+    HasWood,
+    DeliveredWood,
+
+    IsTired,
+    HasRested,
+    IsHungry,
+    HasEaten,
+    IsThirsty,
+    HasDrank,
+}
+
+[System.Serializable]
+public struct WorldState
+{
+    public WorldStateTypes key;
     public int value;
+
+    public static WorldStateTypes ByName(string name)
+    {
+        return (WorldStateTypes)System.Enum.Parse(typeof(WorldStateTypes), name);
+    }
 }
 
 public class WorldStates
 {
 
     // Constructor
-    public Dictionary<string, int> states;
+    public Dictionary<WorldStateTypes, int> states;
 
     public WorldStates()
     {
 
-        states = new Dictionary<string, int>();
+        states = new Dictionary<WorldStateTypes, int>();
     }
 
     /************** Helper funtions ****************/
     // Check for a key
-    public bool HasState(string key)
+    public bool HasState(WorldStateTypes key)
     {
 
         return states.ContainsKey(key);
     }
 
     // Add to our dictionary
-    private void AddState(string key, int value)
+    private void AddState(WorldStateTypes key, int value)
     {
 
         states.Add(key, value);
     }
 
-    public void ModifyState(string key, int value)
+    public void ModifyState(WorldStateTypes key, int value)
     {
 
         // If it contains this key
@@ -61,7 +90,7 @@ public class WorldStates
     }
 
     // Method to remove a state
-    private void RemoveState(string key)
+    private void RemoveState(WorldStateTypes key)
     {
 
         // Check if it frist exists
@@ -73,7 +102,7 @@ public class WorldStates
     }
 
     // Set a state
-    public void SetState(string key, int value)
+    public void SetState(WorldStateTypes key, int value)
     {
 
         // Check if it exists
@@ -89,7 +118,7 @@ public class WorldStates
         }
     }
 
-    public Dictionary<string, int> GetStates()
+    public Dictionary<WorldStateTypes, int> GetStates()
     {
 
         return states;
