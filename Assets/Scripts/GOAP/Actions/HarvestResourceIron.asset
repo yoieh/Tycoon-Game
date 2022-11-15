@@ -21,8 +21,12 @@ MonoBehaviour:
   healthCost: 0
   targetTag: 
   duration: 20
-  preConditions: []
+  preConditions:
+  - key: 15
+    value: 60
+    isCost: 1
   afterEffects:
   - key: 5
     value: 1
+    isCost: 0
   ResourceType: 4

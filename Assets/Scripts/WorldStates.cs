@@ -5,25 +5,41 @@ public enum WorldStateTypes
 {
     None,
 
-    HasFood,
     DeliveredFood,
-    HasGold,
+    HasFood,
+
     DeliveredGold,
-    HasIron,
+    HasGold,
+
     DeliveredIron,
-    HasStone,
+    HasIron,
+
     DeliveredStone,
-    HasWater,
+    HasStone,
+
     DeliveredWater,
-    HasWood,
+    HasWater,
+
     DeliveredWood,
+    HasWood,
 
     IsTired,
     HasRested,
+    HasEnegry,
+
+
     IsHungry,
     HasEaten,
+    HasHunger,
+
+
     IsThirsty,
     HasDrank,
+    HasThirst,
+
+    IsHappy,
+    HasGotenHappy,
+    HasHappyness,
 }
 
 [System.Serializable]
@@ -31,6 +47,7 @@ public struct WorldState
 {
     public WorldStateTypes key;
     public int value;
+    public bool isCost;
 
     public static WorldStateTypes ByName(string name)
     {
