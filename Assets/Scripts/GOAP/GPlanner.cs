@@ -55,7 +55,7 @@ namespace GOAP
             List<Node> leaves = new List<Node>();
 
             Node end = new Node(null, 0, goal, null);
-            bool success = BuildGraph(end, leaves, actions, goal);
+            bool success = BuildGraph(end, leaves, actions, goal, belifestates);
 
             if (!success)
             {
@@ -64,7 +64,7 @@ namespace GOAP
                 {
                     goals += g.Key + " : " + g.Value + ", ";
                 }
-                Debug.Log("NO PLAN" + goals);
+                Debug.Log("NO PLAN " + goals);
                 return null;
             }
 
@@ -100,7 +100,7 @@ namespace GOAP
             return queue;
         }
 
-        private bool BuildGraph(Node parent, List<Node> leaves, List<GAction> usuableActions, Dictionary<string, int> goal)
+        private bool BuildGraph(Node parent, List<Node> leaves, List<GAction> usuableActions, Dictionary<string, int> goal, WorldStates beliefs)
         {
             bool foundPath = false;
 
@@ -116,8 +116,8 @@ namespace GOAP
                     }
 
                     Node node = new Node(parent, parent.cost + action.TotalCost(), currentState, action);
-
-                    bool isAchievable = node.action.IsAchievableGiven(GWorld.Instance.GetWorld().GetStates());
+                    
+                    bool isAchievable = node.action.IsAchievableGiven(beliefs.GetStates());
                     if (isAchievable)
                     {
                         leaves.Add(node);
@@ -126,7 +126,7 @@ namespace GOAP
                     else
                     {
                         List<GAction> subset = ActionSubset(usuableActions, action);
-                        if (BuildGraph(node, leaves, subset, goal))
+                        if (BuildGraph(node, leaves, subset, goal, beliefs))
                             foundPath = true;
                     }
                 }

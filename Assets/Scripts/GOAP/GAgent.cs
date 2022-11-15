@@ -186,7 +186,7 @@ namespace GOAP
 
             if (agentStats.Energy < 100)
             {
-                beliefs.ModifyState("IsTierd", 1);
+                beliefs.SetState("IsTired", 1);
             }
 
         }
