@@ -59,12 +59,12 @@ namespace GOAP
 
             if (!success)
             {
-                string goals = "";
-                foreach (KeyValuePair<string, int> g in goal)
-                {
-                    goals += g.Key + " : " + g.Value + ", ";
-                }
-                Debug.Log("NO PLAN " + goals);
+                // string goals = "";
+                // foreach (KeyValuePair<string, int> g in goal)
+                // {
+                //     goals += g.Key + " : " + g.Value + ", ";
+                // }
+                // Debug.Log("NO PLAN " + goals);
                 return null;
             }
 
@@ -116,7 +116,7 @@ namespace GOAP
                     }
 
                     Node node = new Node(parent, parent.cost + action.TotalCost(), currentState, action);
-                    
+
                     bool isAchievable = node.action.IsAchievableGiven(beliefs.GetStates());
                     if (isAchievable)
                     {
