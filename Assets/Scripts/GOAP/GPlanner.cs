@@ -109,7 +109,7 @@ namespace GOAP
                 if (action.WillSatisfyGiven(parent.state))
                 {
                     Dictionary<WorldStateTypes, int> currentState = new Dictionary<WorldStateTypes, int>(parent.state);
-                    foreach (KeyValuePair<WorldStateTypes, int> eff in action.preconditions)
+                    foreach (KeyValuePair<WorldStateTypes, int> eff in action.preConditions)
                     {
                         if (!currentState.ContainsKey(eff.Key))
                             currentState.Add(eff.Key, eff.Value);

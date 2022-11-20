@@ -17,7 +17,12 @@ namespace GOAP.Actions
 
             if (action.target == null)
             {
-                action.target = ResourceManager.Instance.GetClosestResourceSourceOfType(ResourceType, agent.transform.position).gameObject;
+                ResourceSourceAgent _target = ResourceManager.Instance.GetClosestResourceSourceOfType(ResourceType, agent.transform.position);
+
+                if (_target != null)
+                {
+                    action.target = _target.gameObject;
+                }
             }
 
             return true;

@@ -14,13 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: Rest
   cost: 1
-  energyCost: -16
-  hungerCost: 0
-  thirstCost: 0
-  sanityCost: 0
-  healthCost: 0
   targetTag: 
-  duration: 50
+  duration: 30
+  costConditions:
+  - key: 15
+    value: 30
   preConditions:
   - key: 13
     value: 1

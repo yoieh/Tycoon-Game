@@ -29,8 +29,8 @@ namespace GOAP.Actions
             {
                 // agent.beliefs.ModifyState("Has" + ResourceType.ToString(), -1);
                 
-                // WorldStateTypes stateType = WorldState.ByName("Stored" + ResourceType.ToString());
-                // GWorld.Instance.GetWorld().ModifyState(stateType, itemStack.Amount);
+                WorldStateTypes stateType = WorldState.ByName("Delivered" + ResourceType.ToString());
+                GWorld.Instance.GetWorld().ModifyState(stateType, itemStack.Amount);
 
                 agent.FeedbackText("+" + itemStack.Amount);
 

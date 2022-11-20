@@ -59,9 +59,11 @@ namespace Resource
         {
             ResourceSourceAgent closest = null;
 
+            // filter out all resources that are empty
+
             foreach (ResourceSourceAgent resourceSource in ResourceSources)
             {
-                if (resourceSource.ResourceSource.ResourceType == resource)
+                if (resourceSource.ResourceSource.ResourceType == resource && resourceSource.Amount > 0)
                 {
                     if (closest == null)
                     {

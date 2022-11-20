@@ -9,25 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30716165b9d78f7489c38751413d256c, type: 3}
-  m_Name: DeliverResourceWater
+  m_Script: {fileID: 11500000, guid: 52ae1931137beea4992b95b224818566, type: 3}
+  m_Name: GoAndDrink
   m_EditorClassIdentifier: 
-  actionName: DeliverResourceWater
+  actionName: Action
   cost: 1
-  energyCost: 2
-  hungerCost: 2
-  thirstCost: 3
-  sanityCost: 0
-  healthCost: 0
   targetTag: 
-  duration: 0
+  duration: 2
+  costConditions:
+  - key: 21
+    value: 40
   preConditions:
-  - key: 10
+  - key: 19
     value: 1
-    isCost: 0
-  costConditionsAfterEffects: []
   afterEffects:
-  - key: 9
+  - key: 20
     value: 1
-    isCost: 0
-  ResourceType: 1

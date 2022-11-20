@@ -8,32 +8,32 @@ namespace GOAP.Stats.Buffs
     public class GBaseBuff : ScriptableObject
     {
         // modifies damage dealt
-        public float ModifyDamage(float damage)
+        public int ModifyDamage(int damage)
         {
             return damage;
         }
 
-        public float ModifyHealing(float health)
+        public int ModifyHealing(int health)
         {
             return health;
         }
 
-        public float ModifyHappiness(float happiness)
+        public int ModifyHappiness(int happiness)
         {
             return happiness;
         }
 
-        public float ModifyEnergy(float energy)
+        public int ModifyEnergy(int energy)
         {
             return energy;
         }
 
-        public float ModifyWater(float water)
+        public int ModifyWater(int water)
         {
             return water;
         }
 
-        public float ModifyFood(float food)
+        public int ModifyFood(int food)
         {
             return food;
         }

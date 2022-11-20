@@ -22,9 +22,12 @@ MonoBehaviour:
   targetTag: 
   duration: 0
   preConditions:
-  - key: 11
-    value: 1
-  afterEffects:
   - key: 12
     value: 1
+    isCost: 0
+  costConditionsAfterEffects: []
+  afterEffects:
+  - key: 11
+    value: 1
+    isCost: 0
   ResourceType: 2

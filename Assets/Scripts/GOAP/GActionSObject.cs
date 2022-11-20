@@ -10,17 +10,15 @@ namespace GOAP
         // Name of the action
         public string actionName = "Action";
         // Cost of the action
-        public float cost = 1.0f;
-        public float energyCost = 0.0f;
-        public float hungerCost = 0.0f;
-        public float thirstCost = 0.0f;
-        public float sanityCost = 0.0f;
-        public float healthCost = 0.0f;
-
+        public int cost = 1;
+        
         // Target where the action is going to take place
         public string targetTag;
         // Duration the action should take
-        public float duration = 1.0f;
+        public int duration = 1;
+
+        public WorldState[] costConditions;
+
         // An array of WorldStates of preconditions
         public WorldState[] preConditions;
         // An array of WorldStates of afterEffects

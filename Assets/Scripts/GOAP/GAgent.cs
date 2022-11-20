@@ -128,9 +128,14 @@ namespace GOAP
 
                 var sortedGoals = from entry in goals orderby entry.Value descending select entry;
 
+                // create belief from stats
+                WorldStates beliefStates = agentStats.ToWorldStates();
+                // merge with beliefs
+                beliefStates.Merge(beliefs);
+
                 foreach (KeyValuePair<SubGoal, int> sg in sortedGoals)
                 {
-                    actionQueue = planner.plan(_actions, sg.Key.sGoals, beliefs);
+                    actionQueue = planner.plan(_actions, sg.Key.sGoals, beliefStates);
                     if (actionQueue != null)
                     {
                         currentGoal = sg.Key;
@@ -176,17 +181,66 @@ namespace GOAP
 
         public void OnActionPreformad(GAction action)
         {
-            agentStats.PerformAction(
-                    action.energyCost * action.duration,
-                    action.thirstCost * action.duration,
-                    action.hungerCost * action.duration,
-                    action.sanityCost * action.duration,
-                    action.healthCost * action.duration
-                );
+            int energy = 0;
+            int hunger = 0;
+            int water = 0;
+            int happiness = 0;
+            int health = 0;
 
-            if (agentStats.Energy < 100)
+            if (action.costConditions.ContainsKey(WorldStateTypes.Energy))
+            {
+                energy = action.costConditions[WorldStateTypes.Energy];
+            }
+
+            if (action.costConditions.ContainsKey(WorldStateTypes.Water))
+            {
+                water = action.costConditions[WorldStateTypes.Water];
+            }
+
+            if (action.costConditions.ContainsKey(WorldStateTypes.Food))
+            {
+                hunger = action.costConditions[WorldStateTypes.Food];
+            }
+
+            if (action.costConditions.ContainsKey(WorldStateTypes.Happiness))
+            {
+                happiness = action.costConditions[WorldStateTypes.Happiness];
+            }
+
+            if (action.costConditions.ContainsKey(WorldStateTypes.Health))
+            {
+                health = action.costConditions[WorldStateTypes.Health];
+            }
+
+            agentStats.PerformAction(
+                energy,
+                water,
+                hunger,
+                happiness,
+                health
+            );
+
+            if (agentStats.Energy < 20)
             {
                 beliefs.SetState(WorldStateTypes.IsTired, 1);
+            }
+
+
+            if (agentStats.Food < 20)
+            {
+                beliefs.SetState(WorldStateTypes.IsHungry, 1);
+            }
+
+
+            if (agentStats.Water < 20)
+            {
+                beliefs.SetState(WorldStateTypes.IsThirsty, 1);
+            }
+
+
+            if (agentStats.Happiness < 20)
+            {
+                beliefs.SetState(WorldStateTypes.IsSad, 1);
             }
 
         }

@@ -14,19 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actionName: HarvestResourceWater
   cost: 5
-  energyCost: 3
-  hungerCost: 2
-  thirstCost: 3
-  sanityCost: 0
-  healthCost: 0
   targetTag: 
   duration: 2
-  preConditions:
+  costConditions:
   - key: 15
-    value: 6
-    isCost: 1
+    value: -3
+  - key: 18
+    value: -2
+  - key: 21
+    value: -3
+  preConditions: []
   afterEffects:
-  - key: 9
+  - key: 10
     value: 1
-    isCost: 0
   ResourceType: 1

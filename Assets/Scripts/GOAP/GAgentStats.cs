@@ -9,25 +9,25 @@ namespace GOAP.Stats
     public class GAgentStats : MonoBehaviour
     {
         // properties of character
-        [SerializeField] private float health;
-        [SerializeField] private float happiness;
-        [SerializeField] private float energy;
-        [SerializeField] private float water;
-        [SerializeField] private float food;
+        [SerializeField] private int health;
+        [SerializeField] private int happiness;
+        [SerializeField] private int energy;
+        [SerializeField] private int water;
+        [SerializeField] private int food;
 
-        public float Health { get => health; }
-        public float Happiness { get => happiness; }
-        public float Energy { get => energy; }
-        public float Water { get => water; }
-        public float Food { get => food; }
+        public int Health { get => health; }
+        public int Happiness { get => happiness; }
+        public int Energy { get => energy; }
+        public int Water { get => water; }
+        public int Food { get => food; }
 
         public class OnPreformActionEventArgs : EventArgs
         {
-            public float energy;
-            public float water;
-            public float food;
-            public float happiness;
-            public float health;
+            public int energy;
+            public int water;
+            public int food;
+            public int happiness;
+            public int health;
         }
 
         public static event EventHandler<OnPreformActionEventArgs> OnPerformAction;
@@ -38,19 +38,14 @@ namespace GOAP.Stats
         }
 
         public event EventHandler<OnStatChangedEventArgs> OnHealthIncrease; // event to notify damage
-        public event EventHandler<OnStatChangedEventArgs> OnHealthDecrease; // event to notify healing
         public event EventHandler<OnStatChangedEventArgs> OnHealthChanged; // event to notify health change
         public event EventHandler<OnStatChangedEventArgs> OnHappinessIncrease; // event to notify happiness increase
-        public event EventHandler<OnStatChangedEventArgs> OnHappinessDecrease; // event to notify happiness decrease
         public event EventHandler<OnStatChangedEventArgs> OnHappinessChanged; // event to notify happiness change
         public event EventHandler<OnStatChangedEventArgs> OnEnergyIncrease; // event to notify energy increase
-        public event EventHandler<OnStatChangedEventArgs> OnEnergyDecrease; // event to notify energy decrease
         public event EventHandler<OnStatChangedEventArgs> OnEnergyChanged; // event to notify energy change
         public event EventHandler<OnStatChangedEventArgs> OnWaterIncrease; // event to notify water increase
-        public event EventHandler<OnStatChangedEventArgs> OnWaterDecrease; // event to notify water decrease
         public event EventHandler<OnStatChangedEventArgs> OnWaterChanged; // event to notify water change
         public event EventHandler<OnStatChangedEventArgs> OnFoodIncrease; // event to notify food increase
-        public event EventHandler<OnStatChangedEventArgs> OnFoodDecrease; // event to notify food decrease
         public event EventHandler<OnStatChangedEventArgs> OnFoodChanged; // event to notify food change
 
 
@@ -65,7 +60,7 @@ namespace GOAP.Stats
             if (OnFoodChanged != null) OnFoodChanged(this, new OnStatChangedEventArgs { value = this.food });
         }
 
-        public void HealthIncrease(float health)
+        public void HealthIncrease(int health)
         {
             // modify healing according to each buff
             foreach (GBaseBuff buff in workerBuffs)
@@ -79,22 +74,8 @@ namespace GOAP.Stats
             if (OnHealthChanged != null) OnHealthChanged(this, new OnStatChangedEventArgs { value = Health });
         }
 
-        // Deal damage, damage will be reduced by armour
-        public void HealthDecrease(float health)
-        {
-            // modify damage according to each buff
-            foreach (GBaseBuff buff in workerBuffs)
-            {
-                health = buff.ModifyDamage(health);
-            }
 
-            // damage health
-            this.health -= health;
-            if (OnHealthDecrease != null) OnHealthDecrease(this, new OnStatChangedEventArgs { value = Health });
-            if (OnHealthChanged != null) OnHealthChanged(this, new OnStatChangedEventArgs { value = Health });
-        }
-
-        public void HappinessIncrease(float happiness)
+        public void HappinessIncrease(int happiness)
         {
             // modify happiness according to each buff
             foreach (GBaseBuff buff in workerBuffs)
@@ -108,21 +89,7 @@ namespace GOAP.Stats
             if (OnHappinessChanged != null) OnHappinessChanged(this, new OnStatChangedEventArgs { value = this.happiness });
         }
 
-        public void HappinessDecrease(float happiness)
-        {
-            // modify happiness according to each buff
-            foreach (GBaseBuff buff in workerBuffs)
-            {
-                happiness = buff.ModifyHappiness(happiness);
-            }
-
-            // modify happiness
-            this.happiness -= happiness;
-            if (OnHappinessDecrease != null) OnHappinessDecrease(this, new OnStatChangedEventArgs { value = this.happiness });
-            if (OnHappinessChanged != null) OnHappinessChanged(this, new OnStatChangedEventArgs { value = this.happiness });
-        }
-
-        public void EnergyIncrease(float energy)
+        public void EnergyIncrease(int energy)
         {
             // modify energy according to each buff
             foreach (GBaseBuff buff in workerBuffs)
@@ -136,21 +103,7 @@ namespace GOAP.Stats
             if (OnEnergyChanged != null) OnEnergyChanged(this, new OnStatChangedEventArgs { value = this.energy });
         }
 
-        public void EnergyDecrease(float energy)
-        {
-            // modify energy according to each buff
-            foreach (GBaseBuff buff in workerBuffs)
-            {
-                energy = buff.ModifyEnergy(energy);
-            }
-
-            // modify energy
-            this.energy -= energy;
-            if (OnEnergyDecrease != null) OnEnergyDecrease(this, new OnStatChangedEventArgs { value = this.energy });
-            if (OnEnergyChanged != null) OnEnergyChanged(this, new OnStatChangedEventArgs { value = this.energy });
-        }
-
-        public void WaterIncrease(float water)
+        public void WaterIncrease(int water)
         {
             // modify water according to each buff
             foreach (GBaseBuff buff in workerBuffs)
@@ -164,21 +117,7 @@ namespace GOAP.Stats
             if (OnWaterChanged != null) OnWaterChanged(this, new OnStatChangedEventArgs { value = this.water });
         }
 
-        public void WaterDecrease(float water)
-        {
-            // modify water according to each buff
-            foreach (GBaseBuff buff in workerBuffs)
-            {
-                water = buff.ModifyWater(water);
-            }
-
-            // modify water
-            this.water -= water;
-            if (OnWaterDecrease != null) OnWaterDecrease(this, new OnStatChangedEventArgs { value = this.water });
-            if (OnWaterChanged != null) OnWaterChanged(this, new OnStatChangedEventArgs { value = this.water });
-        }
-
-        public void FoodIncrease(float food)
+        public void FoodIncrease(int food)
         {
             // modify food according to each buff
             foreach (GBaseBuff buff in workerBuffs)
@@ -192,27 +131,13 @@ namespace GOAP.Stats
             if (OnFoodChanged != null) OnFoodChanged(this, new OnStatChangedEventArgs { value = this.food });
         }
 
-        public void FoodDecrease(float food)
+        public void PerformAction(int energy = 0, int water = 0, int food = 0, int happiness = 0, int health = 0)
         {
-            // modify food according to each buff
-            foreach (GBaseBuff buff in workerBuffs)
-            {
-                food = buff.ModifyFood(food);
-            }
-
-            // modify food
-            this.food -= food;
-            if (OnFoodDecrease != null) OnFoodDecrease(this, new OnStatChangedEventArgs { value = this.food });
-            if (OnFoodChanged != null) OnFoodChanged(this, new OnStatChangedEventArgs { value = this.food });
-        }
-
-        public void PerformAction(float energy = 0, float water = 0, float food = 0, float happiness = 0, float health = 0)
-        {
-            HealthDecrease(health);
-            EnergyDecrease(energy);
-            FoodDecrease(food);
-            WaterDecrease(water);
-            HappinessDecrease(happiness);
+            EnergyIncrease(energy);
+            WaterIncrease(water);
+            FoodIncrease(food);
+            HappinessIncrease(happiness);
+            HealthIncrease(health);
 
             if (OnPerformAction != null)
                 OnPerformAction(this, new OnPreformActionEventArgs
@@ -223,6 +148,17 @@ namespace GOAP.Stats
                     happiness = happiness,
                     health = health
                 });
+        }
+
+        public WorldStates ToWorldStates()
+        {
+            WorldStates ws = new WorldStates();
+            ws.SetState(WorldStateTypes.Health, Health);
+            ws.SetState(WorldStateTypes.Energy, Energy);
+            ws.SetState(WorldStateTypes.Food, Food);
+            ws.SetState(WorldStateTypes.Water, Water);
+            ws.SetState(WorldStateTypes.Happiness, Happiness);
+            return ws;
         }
     }
 }

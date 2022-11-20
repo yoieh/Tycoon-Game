@@ -28,7 +28,7 @@ public class GAgentVisualEditor : Editor
             string pre = "";
             string eff = "";
 
-            foreach (KeyValuePair<WorldStateTypes, int> p in a.preconditions)
+            foreach (KeyValuePair<WorldStateTypes, int> p in a.preConditions)
                 pre += p.Key + ", ";
             foreach (KeyValuePair<WorldStateTypes, int> e in a.effects)
                 eff += e.Key + ", ";

@@ -29,7 +29,7 @@ namespace Worker
         // deal damage to worker
         public void WorkerHit()
         {
-            agentStats.HealthDecrease(1);
+            agentStats.HealthIncrease(-1);
         }
     }
 }

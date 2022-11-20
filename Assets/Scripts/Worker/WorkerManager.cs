@@ -76,6 +76,9 @@ namespace Worker
                 WorldStateTypes deliveredGoal = WorldState.ByName("Delivered" + pickedResource.ToString());
 
                 workerAgent.AddGoal(WorldStateTypes.HasRested, 1, 10, false);
+                workerAgent.AddGoal(WorldStateTypes.HasDrank, 1, 10, false);
+                workerAgent.AddGoal(WorldStateTypes.HasEaten, 1, 10, false);
+
                 workerAgent.AddGoal(deliveredGoal, 1, 3, false);
 
                 AddWorker(workerAgent);

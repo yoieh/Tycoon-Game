@@ -1,45 +1,59 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 
 public enum WorldStateTypes
 {
     None,
 
+
     DeliveredFood,
     HasFood,
+
 
     DeliveredGold,
     HasGold,
 
+
     DeliveredIron,
     HasIron,
+
 
     DeliveredStone,
     HasStone,
 
+
     DeliveredWater,
     HasWater,
+
 
     DeliveredWood,
     HasWood,
 
+
+    /* Agent Stat World States */
+    // Energy
     IsTired,
     HasRested,
-    HasEnegry,
+    Energy,
 
-
+    // Hunger
     IsHungry,
     HasEaten,
-    HasHunger,
+    Food,
 
-
+    // Thirst
     IsThirsty,
     HasDrank,
-    HasThirst,
+    Water,
 
-    IsHappy,
+    // Happiness
+    IsSad,
     HasGotenHappy,
-    HasHappyness,
+    Happiness,
+
+    // Health
+    Health
 }
 
 [System.Serializable]
@@ -47,7 +61,6 @@ public struct WorldState
 {
     public WorldStateTypes key;
     public int value;
-    public bool isCost;
 
     public static WorldStateTypes ByName(string name)
     {
@@ -139,5 +152,20 @@ public class WorldStates
     {
 
         return states;
+    }
+
+    public WorldStates Merge(WorldStates beliefStates)
+    {
+        foreach (KeyValuePair<WorldStateTypes, int> belief in beliefStates.GetStates())
+        {
+
+            if (!HasState(belief.Key))
+            {
+
+                states.Add(belief.Key, belief.Value);
+            }
+        }
+
+        return this;
     }
 }

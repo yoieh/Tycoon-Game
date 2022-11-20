@@ -433,11 +433,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75336494a64b19b408a8ec865cf11995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1000
-  happiness: 500
-  energy: 1000
-  water: 1000
-  food: 1000
+  health: 100
+  happiness: 50
+  energy: 100
+  water: 100
+  food: 100
   workerBuffs: []
 --- !u!114 &3562416911996882249
 MonoBehaviour:
@@ -473,7 +473,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FloatingTextPrefab: {fileID: 6219400684990185284, guid: 2e0c097b0a4f845468f15d481631b098, type: 3}
   _state: 0
-  agentStats: {fileID: 0}
+  agentStats: {fileID: 7535937766329576874}
   actions:
   - {fileID: 11400000, guid: 59018882e03e18540bb98160bb4ca614, type: 2}
   - {fileID: 11400000, guid: daa2ddadf14088d4c9c15ede26de85ed, type: 2}
@@ -488,6 +488,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 55d1e51d76bc3c1469972c221299445a, type: 2}
   - {fileID: 11400000, guid: 017e092270d98f24fa8056007c2687d2, type: 2}
   - {fileID: 11400000, guid: 5a41301efee130240a18cd9616c1d288, type: 2}
+  - {fileID: 11400000, guid: cf9376c7abd3e4d45b8d471948a087c1, type: 2}
+  - {fileID: 11400000, guid: ee2d5e3ff2758a64c963a871f915150b, type: 2}
   _actions: []
   inventory:
     _alowedItemTypes: 000000000100000002000000030000000400000005000000
