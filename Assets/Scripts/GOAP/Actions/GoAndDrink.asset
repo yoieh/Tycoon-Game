@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52ae1931137beea4992b95b224818566, type: 3}
   m_Name: GoAndDrink
   m_EditorClassIdentifier: 
-  actionName: Action
+  actionName: Drink
   cost: 1
   targetTag: 
   duration: 2

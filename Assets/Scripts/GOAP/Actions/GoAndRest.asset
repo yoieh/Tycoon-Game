@@ -15,7 +15,7 @@ MonoBehaviour:
   actionName: Rest
   cost: 1
   targetTag: 
-  duration: 30
+  duration: 10
   costConditions:
   - key: 15
     value: 30
