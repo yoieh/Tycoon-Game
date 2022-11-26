@@ -4,7 +4,7 @@ using Cinemachine;
 public class PanAndZoom : MonoBehaviour
 {
 
-    [SerializeField] private float panSpeed = 6f;
+    [SerializeField] private float panSpeed = 10f;
     [SerializeField] private float zoomSpeed = 6f;
     [SerializeField] private float zoomInMax = 10f;
     [SerializeField] private float zoomOutMax = 100f;
@@ -44,7 +44,11 @@ public class PanAndZoom : MonoBehaviour
         float fov = virtualCamera.m_Lens.OrthographicSize;
         float target = Mathf.Clamp(fov - increment * zoomSpeed, zoomInMax, zoomOutMax);
 
-        virtualCamera.m_Lens.OrthographicSize = Mathf.Lerp(fov, target, zoomSpeed * Time.deltaTime);
+        virtualCamera.m_Lens.OrthographicSize = Mathf.Lerp(
+            fov,
+            target,
+            zoomSpeed * Time.deltaTime
+        );
     }
 
 
@@ -79,7 +83,7 @@ public class PanAndZoom : MonoBehaviour
         Vector2 direction = PanDirection(x, y);
         cameraTransform.position = Vector3.Lerp(
             cameraTransform.position,
-            cameraTransform.position + (Vector3)direction * panSpeed,
+            cameraTransform.position + (Vector3)direction,
             panSpeed * Time.deltaTime
         );
 
