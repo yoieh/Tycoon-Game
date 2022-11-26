@@ -34,7 +34,7 @@ namespace Resource
         {
             for (int i = 0; i < count; i++)
             {
-                var randomPosition = position + new Vector2(UnityEngine.Random.Range(-50, 50), UnityEngine.Random.Range(-25, 25));
+                var randomPosition = position + new Vector2(UnityEngine.Random.Range(-100, 100), UnityEngine.Random.Range(-50, 50));
 
                 GameObject resourceSource = Instantiate(ResourceSourcePrefab, randomPosition, Quaternion.identity);
                 resourceSource.transform.parent = transform;
