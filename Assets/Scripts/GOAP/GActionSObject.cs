@@ -9,8 +9,6 @@ namespace GOAP
 
         // Name of the action
         public string actionName = "Action";
-        // Cost of the action
-        public int cost = 1;
         
         // Target where the action is going to take place
         public string targetTag;

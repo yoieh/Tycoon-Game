@@ -7,7 +7,7 @@ namespace Worker.Buffs
     [CreateAssetMenu(fileName = "Healing", menuName = "Worker/Buffs/Healing")]
     public class HealingBuff : GBaseBuff
     {
-        public new float ModifyDamage(float damage)
+        public new int ModifyDamage(int damage)
         {
             if (damage > 0) damage = -damage; // make damage negative so that it will heal
 

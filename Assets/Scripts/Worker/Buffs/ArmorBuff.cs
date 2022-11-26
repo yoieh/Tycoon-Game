@@ -7,8 +7,8 @@ namespace Worker.Buffs
     [CreateAssetMenu(fileName = "Armor", menuName = "Worker/Buffs/Armor")]
     public class ArmorBuff : GBaseBuff
     {
-        public float armor;
-        public new float ModifyDamage(float damage)
+        public int armor;
+        public new int ModifyDamage(int damage)
         {
             damage -= armor; //decreases damage by armor
             return damage > 0 ? damage : 0; //make sure damage is always positive

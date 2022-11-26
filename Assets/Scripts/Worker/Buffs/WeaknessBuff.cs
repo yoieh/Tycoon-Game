@@ -7,8 +7,8 @@ namespace Worker.Buffs
     [CreateAssetMenu(fileName = "Weakness", menuName = "Worker/Buffs/Weakness")]
     public class WeaknessBuff : GBaseBuff
     {
-        public float weaknessAmount;
-        public new float ModifyDamage(float damage)
+        public int weaknessAmount;
+        public new int ModifyDamage(int damage)
         {
             damage *= weaknessAmount; // increasing damage
             return damage;

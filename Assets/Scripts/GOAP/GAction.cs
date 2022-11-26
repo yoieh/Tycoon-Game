@@ -31,9 +31,7 @@ namespace GOAP.Actions
 
         // Name of the action
         public string actionName { get { return action?.actionName ?? ""; } }
-        // Cost of the action
-        public int cost { get { return action.cost; } }
-
+        
         // For game objects with tags
         public string targetTag { get { return action.targetTag; } }
         // Duration the action should take
@@ -100,13 +98,6 @@ namespace GOAP.Actions
             agent.OnActionPreformad(this);
             return preformad;
         }
-
-        public float TotalCost()
-        {
-            return cost * duration;
-            // return (energyCost + hungerCost + thirstCost + sanityCost + healthCost) * duration;
-        }
-
 
         public bool IsAchievable()
         {
