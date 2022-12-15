@@ -70,8 +70,8 @@ namespace Worker
                 WorkerAgent workerAgent = worker.GetComponent<WorkerAgent>();
 
                 // get random resource to harvest
-                var values = Enum.GetValues(typeof(Resource.ResourceType));
-                Resource.ResourceType pickedResource = (Resource.ResourceType)UnityEngine.Random.Range(0, values.Length);
+                var values = Enum.GetValues(typeof(ItemType));
+                ItemType pickedResource = (ItemType)UnityEngine.Random.Range(0, values.Length);
 
                 WorldStateTypes deliveredGoal = WorldState.ByName("Delivered" + pickedResource.ToString());
 

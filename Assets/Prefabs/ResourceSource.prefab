@@ -354,7 +354,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ResourceSource: {fileID: 0}
   spriteRenderer: {fileID: 4934844698052244143}
-  amount: 0
+  inventory:
+    _alowedItemTypes: 
+    _maxAmount: 0
 --- !u!114 &1456065380357159115
 MonoBehaviour:
   m_ObjectHideFlags: 0

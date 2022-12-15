@@ -11,28 +11,33 @@ namespace Resource
         public event Action<int> amountUpdated;
         public Resource ResourceSource;
         [SerializeField] private SpriteRenderer spriteRenderer;
-        [SerializeField] private int amount;
-        public int Amount { get { return amount; } }
+        // [SerializeField] private int amount;
+        public int Amount { get { return inventory.StoredAmount; } }
+
+        [SerializeField] private Inventory inventory = new Inventory();
 
         public int Harvest()
         {
-            if (amount <= 0)
+            if (Amount <= 0)
             {
                 return 0;
             }
 
             int harvestAmount = ResourceSource.Harvest();
+            ItemStack item = inventory.GetItem(ResourceSource.ResourceType, harvestAmount);
 
-            amount -= harvestAmount;
-            amountUpdated?.Invoke(amount);
+            amountUpdated?.Invoke(Amount);
 
-            return harvestAmount;
+            return item.Amount;
         }
 
         public void Regenerate()
         {
-            amount = ResourceSource.Regenerate();
-            amountUpdated?.Invoke(amount);
+            inventory = new Inventory(new List<ItemType> { ResourceSource.ResourceType }, ResourceSource.MaxAmount);
+
+            int amount = ResourceSource.Regenerate();
+            inventory.SetItem(ResourceSource.ResourceType, amount);
+            amountUpdated?.Invoke(Amount);
         }
 
         public void Start()

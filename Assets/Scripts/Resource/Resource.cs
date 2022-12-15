@@ -8,7 +8,7 @@ namespace Resource
     [CreateAssetMenu(fileName = "ResourceName", menuName = "Resource")]
     public class Resource : ScriptableObject
     {
-        public ResourceType ResourceType;
+        public ItemType ResourceType;
         public Color32 Color = new Color32(255, 255, 255, 255);
         public int MinHarvestAmount = 1;
         public int MaxHarvestAmount = 1;

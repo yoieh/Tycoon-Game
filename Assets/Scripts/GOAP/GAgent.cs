@@ -52,7 +52,7 @@ namespace GOAP
         [SerializeField] public List<GAction> _actions = new List<GAction>();
 
         public Dictionary<SubGoal, int> goals = new Dictionary<SubGoal, int>();
-        public Inventory inventory = new Inventory();
+        [SerializeField] private Inventory inventory = new Inventory();
         public WorldStates beliefs = new WorldStates();
 
         GPlanner planner;

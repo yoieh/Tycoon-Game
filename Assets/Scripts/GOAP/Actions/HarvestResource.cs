@@ -9,7 +9,7 @@ namespace GOAP.Actions
     [CreateAssetMenu(fileName = "HarvestResourceNAME", menuName = "Actoins/HarvestResource")]
     public class HarvestResource : GActionSObject
     {
-        public ResourceType ResourceType;
+        public ItemType ResourceType;
 
         public override bool PrePerform(GAgent agent, GAction action)
         {

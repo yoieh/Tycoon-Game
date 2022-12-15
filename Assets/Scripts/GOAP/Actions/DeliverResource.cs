@@ -8,7 +8,7 @@ namespace GOAP.Actions
     [CreateAssetMenu(fileName = "DeliverResourceNAME", menuName = "Actoins/DeliverResource")]
     public class DeliverResource : GActionSObject
     {
-        public ResourceType ResourceType;
+        public ItemType ResourceType;
 
         public override bool PrePerform(GAgent agent, GAction action)
         {

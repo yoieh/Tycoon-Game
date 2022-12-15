@@ -13,7 +13,6 @@ public enum ItemType
 }
 
 
-
 [System.Serializable]
 public struct ItemStack
 {
@@ -83,6 +82,27 @@ public class Inventory
 
     public int StoredAmount { get { return TotalAmount(); } }
 
+    public int MaxAmount { get { return _maxAmount; } }
+
+    public Inventory() { }
+
+    public Inventory(List<ItemType> alowedItemTypes, int maxAmount)
+    {
+        _alowedItemTypes = alowedItemTypes;
+        _maxAmount = maxAmount;
+    }
+
+    public Inventory(List<ItemType> alowedItemTypes)
+    {
+        _alowedItemTypes = alowedItemTypes;
+    }
+
+    public Inventory(int maxAmount)
+    {
+        _maxAmount = maxAmount;
+    }
+
+
     public bool SetItem(ItemType itemType, int amount)
     {
 
@@ -106,9 +126,9 @@ public class Inventory
     public ItemStack GetItem(ItemType itemType, int amount)
     {
         // Check Item Type - Returns false if not valid
-        if (!CheckItemType(itemType)) return new ItemStack(itemType, 0);
+        if (!CheckItemType(itemType)) return new ItemStack { ItemType = itemType, Amount = 0 };
 
-        if (!_itemsSlots.ContainsKey(itemType)) return new ItemStack(itemType, 0);
+        if (!_itemsSlots.ContainsKey(itemType)) return new ItemStack { ItemType = itemType, Amount = 0 };
 
         if (_itemsSlots[itemType] < amount) amount = _itemsSlots[itemType].Amount;
 

@@ -4,15 +4,15 @@ using UnityEngine;
 
 namespace Resource
 {
-    public enum ResourceType
-    {
-        Food = ItemType.Food,
-        Water = ItemType.Water,
-        Wood = ItemType.Wood,
-        Stone = ItemType.Stone,
-        Iron = ItemType.Iron,
-        Gold = ItemType.Gold
-    }
+    // public enum ResourceType
+    // {
+    //     Food = ItemType.Food,
+    //     Water = ItemType.Water,
+    //     Wood = ItemType.Wood,
+    //     Stone = ItemType.Stone,
+    //     Iron = ItemType.Iron,
+    //     Gold = ItemType.Gold
+    // }
 
     public class ResourceManager : MonoBehaviourSingleton<ResourceManager>
     {
@@ -55,7 +55,7 @@ namespace Resource
             throw new System.NotImplementedException();
         }
 
-        public ResourceSourceAgent GetClosestResourceSourceOfType(ResourceType resource, Vector2 position)
+        public ResourceSourceAgent GetClosestResourceSourceOfType(ItemType resource, Vector2 position)
         {
             ResourceSourceAgent closest = null;
 
