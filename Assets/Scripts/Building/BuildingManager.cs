@@ -1,28 +1,29 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+
+public enum BuildingType
+{
+    House,
+    Storage
+}
 
 public class BuildingManager : MonoBehaviourSingleton<BuildingManager>
 {
     [SerializeField] private GameObject FloatingTextPrefab;
 
     // Reference to the building prefab
-    [SerializeField] private GameObject buildingPrefab;
     [SerializeField] private BuildingScriptableObject buildingData;
 
-    void FixedUpdate()
+    private void Start()
     {
         // Get the Input System's PlayerInput component.
-        Mouse gamepad = Mouse.current;
+        PlayerInput playerInput = GetComponent<PlayerInput>();
 
-        // Check if the left mouse button was pressed.
-        if (gamepad.leftButton.wasPressedThisFrame)
-        {
-            // Get the mouse position in world space.
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-
-            BuildBuilding(buildingData, mousePosition);
-        }
+        // Register the OnActionPreformad method to the Fire action.
+        playerInput.actions["Fire"].performed += OnActionPreformad;
     }
+
 
     // Method for instantiating a new building
     public void BuildBuilding(BuildingScriptableObject buildingData, Vector2 position)
@@ -46,7 +47,7 @@ public class BuildingManager : MonoBehaviourSingleton<BuildingManager>
         if (canBuild)
         {
             // Instantiate a new building at the specified location
-            GameObject newBuilding = Instantiate(buildingPrefab, position, Quaternion.identity);
+            GameObject newBuilding = Instantiate(buildingData.prefab, position, Quaternion.identity);
             newBuilding.transform.parent = transform;
 
             // Configure the newly created building using the data from the scriptable object
@@ -74,6 +75,31 @@ public class BuildingManager : MonoBehaviourSingleton<BuildingManager>
         }
 
         FeedbackText(text, position, color);
+    }
+
+    private void OnActionPreformad(InputAction.CallbackContext context)
+    {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+
+        Debug.Log("OnActionPreformad");
+
+        // Get the mouse position in world space.
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+
+        BuildBuilding(buildingData, mousePosition);
+
+
+        // // Get the Input System's PlayerInput component.
+        // Mouse gamepad = Mouse.current;
+
+        // // Check if the left mouse button was pressed.
+        // if (gamepad.leftButton.wasPressedThisFrame)
+        // {
+        //     // Get the mouse position in world space.
+        //     Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+
+        //     BuildBuilding(buildingData, mousePosition);
+        // }
     }
 
     public void FeedbackText(string text, Vector2 position, Color? color = null)
