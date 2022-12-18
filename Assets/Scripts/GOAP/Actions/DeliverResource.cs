@@ -23,7 +23,7 @@ namespace GOAP.Actions
         {
             agent.State = Worker.States.Idle;
 
-            ItemStack? itemStack = agent.GetItemFromInventory((ItemType)ResourceType);
+            ItemStack? itemStack = agent.GetItemFromInventory(ResourceType);
 
             if (itemStack != null)
             {
@@ -33,6 +33,7 @@ namespace GOAP.Actions
 
                 // TODO: add inventory to deliverd storage
                 GWorld.Instance.GetWorld().ModifyState(stateType, itemStack?.Amount ?? 0);
+                GlobalStorage.AddItemToInventory(ResourceType, itemStack?.Amount ?? 0);
 
                 agent.FeedbackText("+" + itemStack?.Amount);
 

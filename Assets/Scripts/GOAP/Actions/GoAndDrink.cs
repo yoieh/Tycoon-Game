@@ -21,6 +21,8 @@ namespace GOAP.Actions
         {
             agent.State = Worker.States.Idle;
 
+            GlobalStorage.Inventory.GetItem(ItemType.Water, -1);
+
             agent.FeedbackText(WorldStateTypes.HasDrank.ToString());
             agent.beliefs.ModifyState(WorldStateTypes.IsThirsty, -1);
 

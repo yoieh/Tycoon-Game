@@ -12,10 +12,15 @@ public class DisplayWorldStates : MonoBehaviour
     void LateUpdate()
     {
         string s = "";
-        foreach (KeyValuePair<WorldStateTypes, int> w in GWorld.Instance.GetWorld().GetStates())
+        foreach (KeyValuePair<ItemType, ItemStack> w in GlobalStorage.Inventory.ItemsSlots)
         {
-            s += w.Key + ": " + w.Value + "\n";
+            s += w.Key + ": " + w.Value.Amount + "\n";
         }
+
+        // foreach (KeyValuePair<WorldStateTypes, int> w in GWorld.Instance.GetWorld().GetStates())
+        // {
+        //     s += w.Key + ": " + w.Value + "\n";
+        // }
 
         text.text = s;
     }

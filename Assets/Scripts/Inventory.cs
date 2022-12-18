@@ -84,6 +84,8 @@ public class Inventory
 
     public int MaxAmount { get { return _maxAmount; } }
 
+    public Dictionary<ItemType, ItemStack> ItemsSlots { get { return _itemsSlots; } }
+
     public Inventory() { }
 
     public Inventory(List<ItemType> alowedItemTypes, int maxAmount)
@@ -105,7 +107,6 @@ public class Inventory
 
     public bool SetItem(ItemType itemType, int amount)
     {
-
         // Check Item Type - Returns false if not valid
         if (!CheckItemType(itemType)) return false;
 
@@ -161,11 +162,17 @@ public class Inventory
 
     private bool CheckItemType(ItemType itemType)
     {
+        // If none itemtypes are in the list, then all itemtypes are allowed
+        if (_alowedItemTypes.Count == 0) return true;
+
         return _alowedItemTypes.Contains(itemType);
     }
 
     private bool CheckItemAmount(int amount)
     {
+        // If max amount is -1, then there is no limit
+        if (_maxAmount == -1) return true;
+
         return TotalAmount() + amount <= _maxAmount;
     }
 
