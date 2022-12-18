@@ -16,12 +16,17 @@ public class GlobalStorage : MonoBehaviourSingleton<GlobalStorage>
 
     public static ItemStack? GetItemFromInventory(ItemType itemType, int amount)
     {
-        return Instance._inventory.GetItem(itemType, -amount);
+        return Instance._inventory.GetItem(itemType, amount);
     }
 
     public static ItemStack? GetItemFromInventory(ItemType itemType)
     {
         return Instance._inventory.GetItem(itemType);
+    }
+
+    public static bool HasItemInInventory(ItemType itemType, int amount)
+    {
+        return Instance._inventory.HasItem(itemType, amount);
     }
 }
 

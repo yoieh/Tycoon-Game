@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91865b24d83f2064f96ae2b6d9c915ba, type: 3}
   m_Name: Storage
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Storage
   cost:
-    ItemType: 0
-    Amount: 0
+  - ItemType: 2
+    Amount: 100
+  - ItemType: 3
+    Amount: 50
+  - ItemType: 3
+    Amount: 50
   spawnPosition: {x: 0, y: 0, z: 0}

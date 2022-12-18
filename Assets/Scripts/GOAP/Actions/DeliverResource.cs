@@ -23,10 +23,12 @@ namespace GOAP.Actions
         {
             agent.State = Worker.States.Idle;
 
-            ItemStack? itemStack = agent.GetItemFromInventory(ResourceType);
+            bool hasItem = agent.HasItemInInventory(ResourceType);
 
-            if (itemStack != null)
+            if (hasItem)
             {
+                ItemStack? itemStack = agent.GetItemFromInventory(ResourceType);
+
                 // agent.beliefs.ModifyState("Has" + ResourceType.ToString(), -1);
 
                 WorldStateTypes stateType = WorldState.ByName("Delivered" + ResourceType.ToString());

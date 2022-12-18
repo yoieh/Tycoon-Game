@@ -24,6 +24,10 @@ namespace Resource
             // Returns null if harvest failed
             if (harvestAmount <= 0) return null;
 
+            bool hasItem = inventory.HasItem(ResourceSource.ResourceType, harvestAmount);
+
+            if (!hasItem) return null;
+
             ItemStack? item = inventory.GetItem(ResourceSource.ResourceType, harvestAmount);
 
             amountUpdated?.Invoke(Amount);

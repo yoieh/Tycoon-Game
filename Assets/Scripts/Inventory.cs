@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,66 +11,6 @@ public enum ItemType
     Stone,
     Iron,
     Gold
-}
-
-
-[System.Serializable]
-public struct ItemStack
-{
-    public ItemType ItemType;
-    public int Amount;
-
-    public ItemStack(ItemType itemType, int amount)
-    {
-        ItemType = itemType;
-        Amount = amount;
-    }
-
-    public static bool operator ==(ItemStack aStack, ItemStack bStack) => aStack.Amount == bStack.Amount;
-    public static bool operator !=(ItemStack aStack, ItemStack bStack) => aStack.Amount != bStack.Amount;
-
-    public static bool operator >(ItemStack aStack, ItemStack bStack) => aStack.Amount > bStack.Amount;
-    public static bool operator <(ItemStack aStack, ItemStack bStack) => aStack.Amount < bStack.Amount;
-
-    public static bool operator >=(ItemStack aStack, ItemStack bStack) => aStack.Amount >= bStack.Amount;
-    public static bool operator <=(ItemStack aStack, ItemStack bStack) => aStack.Amount <= bStack.Amount;
-
-    public static ItemStack operator +(ItemStack aStack, ItemStack bStack) => new ItemStack(aStack.ItemType, aStack.Amount + bStack.Amount);
-    public static ItemStack operator -(ItemStack aStack, ItemStack bStack) => new ItemStack(aStack.ItemType, aStack.Amount - bStack.Amount);
-
-    public static ItemStack operator *(ItemStack aStack, ItemStack bStack) => new ItemStack(aStack.ItemType, aStack.Amount * bStack.Amount);
-
-    public static ItemStack operator ++(ItemStack aStack) => new ItemStack(aStack.ItemType, aStack.Amount + 1);
-    public static ItemStack operator --(ItemStack aStack) => new ItemStack(aStack.ItemType, aStack.Amount - 1);
-
-    public static bool operator ==(ItemStack aStack, int bAmount) => aStack.Amount == bAmount;
-    public static bool operator !=(ItemStack aStack, int bAmount) => aStack.Amount != bAmount;
-
-    public static bool operator >(ItemStack aStack, int bAmount) => aStack.Amount > bAmount;
-    public static bool operator <(ItemStack aStack, int bAmount) => aStack.Amount < bAmount;
-
-    public static bool operator >=(ItemStack aStack, int bAmount) => aStack.Amount >= bAmount;
-    public static bool operator <=(ItemStack aStack, int bAmount) => aStack.Amount <= bAmount;
-
-    public static ItemStack operator +(ItemStack aStack, int bAmount) => new ItemStack(aStack.ItemType, aStack.Amount + bAmount);
-    public static ItemStack operator -(ItemStack aStack, int bAmount) => new ItemStack(aStack.ItemType, aStack.Amount - bAmount);
-
-    public static ItemStack operator *(ItemStack aStack, int bAmount) => new ItemStack(aStack.ItemType, aStack.Amount * bAmount);
-
-    public override bool Equals(object obj)
-    {
-        return base.Equals(obj);
-    }
-
-    public override int GetHashCode()
-    {
-        return base.GetHashCode();
-    }
-
-    public override string ToString()
-    {
-        return ItemType.ToString();
-    }
 }
 
 [System.Serializable]
@@ -104,16 +45,12 @@ public class Inventory
         _maxAmount = maxAmount;
     }
 
-
     public bool SetItem(ItemType itemType, int amount)
     {
-        // Check Item Type - Returns false if not valid
         if (!CheckItemType(itemType)) return false;
 
-        // Check Item Amount - Returns false if not valid
         if (!CheckItemAmount(amount)) return false;
 
-        // 3. Adds to stored items
         if (!_itemsSlots.ContainsKey(itemType))
         {
             _itemsSlots.Add(itemType, new ItemStack { ItemType = itemType, Amount = amount });
@@ -124,12 +61,27 @@ public class Inventory
         return true;
     }
 
+    public bool SetItem(ItemStack itemStack)
+    {
+        if (!CheckItemType(itemStack.ItemType)) return false;
+
+        if (!CheckItemAmount(itemStack.Amount)) return false;
+
+        if (!_itemsSlots.ContainsKey(itemStack.ItemType))
+        {
+            _itemsSlots.Add(itemStack.ItemType, itemStack);
+            return true;
+        }
+
+        _itemsSlots[itemStack.ItemType] = _itemsSlots[itemStack.ItemType] + itemStack.Amount;
+        return true;
+    }
+
+    // Gets items from item stack in inventory
     public ItemStack? GetItem(ItemType itemType, int amount)
     {
         // Check Item Type - Returns false if not valid
-        if (!CheckItemType(itemType)) return null;
-
-        if (!_itemsSlots.ContainsKey(itemType)) return null;
+        if (!HasItem(itemType)) return null;
 
         if (_itemsSlots[itemType] < amount) amount = _itemsSlots[itemType].Amount;
 
@@ -139,25 +91,50 @@ public class Inventory
 
     public ItemStack? GetItem(ItemType itemType)
     {
-        if (!_itemsSlots.ContainsKey(itemType)) return null;
+        if (!HasItem(itemType)) return null;
 
         return GetItem(itemType, _itemsSlots[itemType].Amount);
     }
 
-    // Should Retrave A World state of stored items that can be used GAgent Beliefs in GOAP Planner
-    public WorldStates GetStoredItemState()
+    public ItemStack? GetItem(ItemStack itemStack)
     {
-        WorldStates states = new WorldStates();
-        foreach (var item in _itemsSlots)
+        return GetItem(itemStack.ItemType, itemStack.Amount);
+    }
+
+    public bool RemoveItem(ItemStack itemStack)
+    {
+        if (!HasItem(itemStack)) return false;
+
+        if (_itemsSlots[itemStack.ItemType] == itemStack)
         {
-            if (item.Value > 0)
-            {
-                WorldStateTypes stateType = WorldState.ByName("Has" + item.ToString());
-                states.SetState(stateType, item.Value.Amount);
-            }
+            _itemsSlots.Remove(itemStack.ItemType);
+            return true;
         }
 
-        return states;
+        _itemsSlots[itemStack.ItemType] = _itemsSlots[itemStack.ItemType] - itemStack.Amount;
+        return true;
+    }
+
+
+    public bool HasItem(ItemType itemType, int amount)
+    {
+        if (!CheckItemType(itemType)) return false;
+
+        if (!_itemsSlots.ContainsKey(itemType)) return false;
+
+        return _itemsSlots[itemType] >= amount;
+    }
+
+    public bool HasItem(ItemType itemType)
+    {
+        return HasItem(itemType, 0);
+    }
+
+    public bool HasItem(ItemStack itemStack)
+    {
+        if (!HasItem(itemStack.ItemType, itemStack.Amount)) return false;
+
+        return _itemsSlots[itemStack.ItemType] >= itemStack;
     }
 
     private bool CheckItemType(ItemType itemType)
@@ -185,5 +162,21 @@ public class Inventory
         }
 
         return total;
+    }
+
+    // Should Retrave A World state of stored items that can be used GAgent Beliefs in GOAP Planner
+    public WorldStates GetStoredItemState()
+    {
+        WorldStates states = new WorldStates();
+        foreach (var item in _itemsSlots)
+        {
+            if (item.Value > 0)
+            {
+                WorldStateTypes stateType = WorldState.ByName("Has" + item.ToString());
+                states.SetState(stateType, item.Value.Amount);
+            }
+        }
+
+        return states;
     }
 }
