@@ -34,14 +34,17 @@ namespace GOAP.Actions
 
             if (action.target == null) return false;
 
-            ItemStack? harvestItemStack = action.target.GetComponent<Resource.ResourceSourceAgent>().Harvest();
-            int amount = action.target.GetComponent<Resource.ResourceSourceAgent>().Amount;
-            if (amount <= 0) action.target = null;
+            ResourceSourceAgent resourceSourceAgent = action.target.GetComponent<Resource.ResourceSourceAgent>();
+            if (resourceSourceAgent == null) return false;
+
+            ItemStack? harvestItemStack = resourceSourceAgent.Harvest();
+            int amountRest = resourceSourceAgent.Amount;
+            if (amountRest <= 0) action.target = null;
 
             if (harvestItemStack == null || harvestItemStack?.Amount <= 0) return false;
 
 
-            Color32 color = action.target.GetComponent<Resource.ResourceSourceAgent>().ResourceSource.Color;
+            Color32 color = resourceSourceAgent.ResourceSource.Color;
             // adds the item to the inventory returns false if inventory is full
             if (agent.AddItemToInventory((ItemType)ResourceType, harvestItemStack?.Amount ?? 0))
             {

@@ -138,6 +138,8 @@ public class Inventory
 
     public ItemStack? GetItem(ItemType itemType)
     {
+        if (!_itemsSlots.ContainsKey(itemType)) return null;
+
         return GetItem(itemType, _itemsSlots[itemType].Amount);
     }
 
