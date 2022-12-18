@@ -15,7 +15,7 @@ namespace Systems
         private const float TICK_TIMER_MAX = .2f;
 
         private int tick;
-        private float tickTimer;
+        private float tickTimer = 0f;
 
         private float _timeScale = 1f;
 
@@ -28,11 +28,13 @@ namespace Systems
         private void Update()
         {
             tickTimer += Time.deltaTime;
-            if (tickTimer > TICK_TIMER_MAX)
+            if (tickTimer >= TICK_TIMER_MAX)
             {
-                tickTimer -= TICK_TIMER_MAX;
+                tickTimer = 0f;
                 tick++;
                 if (OnTick != null) OnTick(this, new OnTickEventArgs { tick = tick });
+                Debug.Log("Tick: " + tick);
+
             }
         }
 

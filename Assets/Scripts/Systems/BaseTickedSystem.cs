@@ -27,7 +27,7 @@ namespace Systems
         }
 
         private void TimeTickSystem_OnTick(object sender, TimeTickSystem.OnTickEventArgs e)
-        {
+        {            
             WillTickUpdate();
             TickUpdate();
             HasTickUpdated();
