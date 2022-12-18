@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: GoAndEat
   m_EditorClassIdentifier: 
   actionName: Eat
-  cost: 1
   targetTag: 
   duration: 3
   costConditions:

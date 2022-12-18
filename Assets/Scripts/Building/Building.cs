@@ -6,7 +6,7 @@ public class Building : MonoBehaviour
     // Cost of the building
     public List<ItemStack> cost;
 
-    public BuildingType buildingType;
+    public BuildingType BuildingType;
 
     // Any other properties you want to define for your building
     // ...

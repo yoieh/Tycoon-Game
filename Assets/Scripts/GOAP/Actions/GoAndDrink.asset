@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: GoAndDrink
   m_EditorClassIdentifier: 
   actionName: Drink
-  cost: 1
   targetTag: 
   duration: 2
   costConditions:

@@ -12,9 +12,18 @@ namespace GOAP.Actions
 
         public override bool PrePerform(GAgent agent, GAction action)
         {
+            Building building = BuildingManager.Instance.GetClosestBuildingOfType(BuildingType.Storage, agent.transform.position);
+            
+            Debug.Log("building: " + building);
+
+            if (building == null)
+            {
+                return false;
+            }
+
             agent.State = Worker.States.MoveTo;
 
-            // action.target = find storage building
+            action.target = building.gameObject;
 
             return true;
         }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -14,6 +15,16 @@ public class BuildingManager : MonoBehaviourSingleton<BuildingManager>
 
     // Reference to the building prefab
     [SerializeField] private BuildingScriptableObject buildingData;
+
+
+    private List<Building> Buildings = new List<Building>();
+
+
+    public void Awake()
+    {
+        // Add storage building to the center of the map
+        SpawnBuilding(buildingData, Vector2.zero);
+    }
 
     private void Start()
     {
@@ -46,14 +57,7 @@ public class BuildingManager : MonoBehaviourSingleton<BuildingManager>
 
         if (canBuild)
         {
-            // Instantiate a new building at the specified location
-            GameObject newBuilding = Instantiate(buildingData.prefab, position, Quaternion.identity);
-            newBuilding.transform.parent = transform;
-
-            // Configure the newly created building using the data from the scriptable object
-            newBuilding.name = buildingData.name;
-            newBuilding.GetComponent<Building>().cost = buildingData.cost;
-            // ... add any other necessary configurations here
+            SpawnBuilding(buildingData, position);
 
             text = $"{buildingData.name} built \n";
             // Deduct the cost of the building from the player's inventory
@@ -77,32 +81,66 @@ public class BuildingManager : MonoBehaviourSingleton<BuildingManager>
         FeedbackText(text, position, color);
     }
 
+    public Building GetClosestBuildingOfType(BuildingType buildingType, Vector2 position)
+    {
+        Building closest = null;
+
+        Debug.Log("Buildings: " + Buildings.Count);
+
+        // Get all buildings of the specified type
+        foreach (Building building in Buildings)
+        {
+            Debug.Log("BuildingType: " + building.BuildingType);
+
+            if (building.BuildingType == buildingType)
+            {
+
+                if (closest == null)
+                {
+                    closest = building;
+                }
+                else
+                {
+                    // Check if the current building is closer than the previously found closest building
+                    if (Vector2.Distance(position, building.transform.position) < Vector2.Distance(position, closest.transform.position))
+                    {
+                        closest = building;
+                    }
+                }
+            }
+        }
+
+        return closest;
+    }
+
+    private Building SpawnBuilding(BuildingScriptableObject buildingData, Vector2 position)
+    {
+        // Instantiate a new building at the specified location
+        GameObject newBuilding = Instantiate(buildingData.prefab, position, Quaternion.identity);
+        newBuilding.transform.parent = transform;
+
+        // Configure the newly created building using the data from the scriptable object
+        newBuilding.name = buildingData.name;
+        newBuilding.GetComponent<Building>().cost = buildingData.cost;
+        newBuilding.GetComponent<Building>().BuildingType = buildingData.buildingType;
+
+        // Add the building to the list of buildings
+        Buildings.Add(newBuilding.GetComponent<Building>());
+
+        return newBuilding.GetComponent<Building>();
+    }
+
     private void OnActionPreformad(InputAction.CallbackContext context)
     {
         if (EventSystem.current.IsPointerOverGameObject()) return;
-
-        Debug.Log("OnActionPreformad");
 
         // Get the mouse position in world space.
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
         BuildBuilding(buildingData, mousePosition);
-
-
-        // // Get the Input System's PlayerInput component.
-        // Mouse gamepad = Mouse.current;
-
-        // // Check if the left mouse button was pressed.
-        // if (gamepad.leftButton.wasPressedThisFrame)
-        // {
-        //     // Get the mouse position in world space.
-        //     Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
-
-        //     BuildBuilding(buildingData, mousePosition);
-        // }
     }
 
-    public void FeedbackText(string text, Vector2 position, Color? color = null)
+    private void FeedbackText(string text, Vector2 position, Color? color = null)
     {
         GameObject prefab = Instantiate(FloatingTextPrefab, position, Quaternion.identity);
         prefab.GetComponentInChildren<TMPro.TextMeshPro>().text = text;

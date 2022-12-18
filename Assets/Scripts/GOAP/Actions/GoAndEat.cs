@@ -10,9 +10,16 @@ namespace GOAP.Actions
     {
         public override bool PrePerform(GAgent agent, GAction action)
         {
+            Building building = BuildingManager.Instance.GetClosestBuildingOfType(BuildingType.Storage, agent.transform.position);
+
+            if (building == null)
+            {
+                return false;
+            }
+
             agent.State = Worker.States.MoveTo;
 
-            action.target = agent.gameObject;
+            action.target = building.gameObject;
 
             return true;
         }
@@ -21,7 +28,8 @@ namespace GOAP.Actions
         {
             agent.State = Worker.States.Idle;
 
-            ItemStack? itemStack = GlobalStorage.Inventory.GetItem(ItemType.Food, 1);
+            // TODO: Applay cost condations
+            ItemStack? itemStack = GlobalStorage.Inventory.GetItem(ItemType.Food, 60);
 
             if (itemStack == null)
             {

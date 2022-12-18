@@ -20,4 +20,5 @@ MonoBehaviour:
     Amount: 50
   - ItemType: 3
     Amount: 50
-  spawnPosition: {x: 0, y: 0, z: 0}
+  buildingType: 1
+  prefab: {fileID: 8329683088211940220, guid: d918b73b81f26254196777bb048d2ac3, type: 3}
