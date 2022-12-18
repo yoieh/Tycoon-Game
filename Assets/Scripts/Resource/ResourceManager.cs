@@ -14,8 +14,11 @@ namespace Resource
     //     Gold = ItemType.Gold
     // }
 
+
     public class ResourceManager : MonoBehaviourSingleton<ResourceManager>
     {
+        public int count = 10;
+
         [SerializeField] private List<Resource> Resources = new List<Resource>();
 
         [SerializeField] private GameObject ResourceSourcePrefab;
@@ -26,7 +29,7 @@ namespace Resource
         {
             foreach (Resource resource in Resources)
             {
-                SpawnResourceSources(resource, Vector2.zero, 10);
+                SpawnResourceSources(resource, Vector2.zero, count);
             }
         }
 
