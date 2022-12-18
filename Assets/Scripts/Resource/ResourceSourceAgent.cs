@@ -16,19 +16,19 @@ namespace Resource
 
         [SerializeField] private Inventory inventory = new Inventory();
 
-        public int Harvest()
+        public ItemStack? Harvest()
         {
-            if (Amount <= 0)
-            {
-                return 0;
-            }
+            if (Amount <= 0) return null;
 
             int harvestAmount = ResourceSource.Harvest();
-            ItemStack item = inventory.GetItem(ResourceSource.ResourceType, harvestAmount);
+            // Returns null if harvest failed
+            if (harvestAmount <= 0) return null;
+
+            ItemStack? item = inventory.GetItem(ResourceSource.ResourceType, harvestAmount);
 
             amountUpdated?.Invoke(Amount);
 
-            return item.Amount;
+            return item;
         }
 
         public void Regenerate()

@@ -123,12 +123,12 @@ public class Inventory
         return true;
     }
 
-    public ItemStack GetItem(ItemType itemType, int amount)
+    public ItemStack? GetItem(ItemType itemType, int amount)
     {
         // Check Item Type - Returns false if not valid
-        if (!CheckItemType(itemType)) return new ItemStack { ItemType = itemType, Amount = 0 };
+        if (!CheckItemType(itemType)) return null;
 
-        if (!_itemsSlots.ContainsKey(itemType)) return new ItemStack { ItemType = itemType, Amount = 0 };
+        if (!_itemsSlots.ContainsKey(itemType)) return null;
 
         if (_itemsSlots[itemType] < amount) amount = _itemsSlots[itemType].Amount;
 
@@ -136,7 +136,7 @@ public class Inventory
         return new ItemStack { ItemType = itemType, Amount = amount };
     }
 
-    public ItemStack GetItem(ItemType itemType)
+    public ItemStack? GetItem(ItemType itemType)
     {
         return GetItem(itemType, _itemsSlots[itemType].Amount);
     }

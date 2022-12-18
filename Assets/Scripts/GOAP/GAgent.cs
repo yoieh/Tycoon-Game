@@ -257,12 +257,12 @@ namespace GOAP
             return inventory.SetItem(itemType, amount);
         }
 
-        public ItemStack GetItemFromInventory(ItemType itemType, int amount)
+        public ItemStack? GetItemFromInventory(ItemType itemType, int amount)
         {
             return inventory.GetItem(itemType, -amount);
         }
 
-        public ItemStack GetItemFromInventory(ItemType itemType)
+        public ItemStack? GetItemFromInventory(ItemType itemType)
         {
             return inventory.GetItem(itemType);
         }

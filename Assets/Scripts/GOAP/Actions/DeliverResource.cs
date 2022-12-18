@@ -23,16 +23,18 @@ namespace GOAP.Actions
         {
             agent.State = Worker.States.Idle;
 
-            ItemStack itemStack = agent.GetItemFromInventory((ItemType)ResourceType);
+            ItemStack? itemStack = agent.GetItemFromInventory((ItemType)ResourceType);
 
             if (itemStack != null)
             {
                 // agent.beliefs.ModifyState("Has" + ResourceType.ToString(), -1);
-                
-                WorldStateTypes stateType = WorldState.ByName("Delivered" + ResourceType.ToString());
-                GWorld.Instance.GetWorld().ModifyState(stateType, itemStack.Amount);
 
-                agent.FeedbackText("+" + itemStack.Amount);
+                WorldStateTypes stateType = WorldState.ByName("Delivered" + ResourceType.ToString());
+
+                // TODO: add inventory to deliverd storage
+                GWorld.Instance.GetWorld().ModifyState(stateType, itemStack?.Amount ?? 0);
+
+                agent.FeedbackText("+" + itemStack?.Amount);
 
                 return true;
             }

@@ -32,26 +32,21 @@ namespace GOAP.Actions
         {
             agent.State = Worker.States.Idle;
 
-            int harvestAmount = action.target.GetComponent<Resource.ResourceSourceAgent>().Harvest();
+            if (action.target == null) return false;
+
+            ItemStack? harvestItemStack = action.target.GetComponent<Resource.ResourceSourceAgent>().Harvest();
             int amount = action.target.GetComponent<Resource.ResourceSourceAgent>().Amount;
+            if (amount <= 0) action.target = null;
+
+            if (harvestItemStack == null || harvestItemStack?.Amount <= 0) return false;
+
+
             Color32 color = action.target.GetComponent<Resource.ResourceSourceAgent>().ResourceSource.Color;
-
-            if (amount <= 0)
-            {
-                action.target = null;
-            }
-
-            // failed to harvest
-            if (harvestAmount <= 0)
-            {
-                return false;
-            }
-
             // adds the item to the inventory returns false if inventory is full
-            if (agent.AddItemToInventory((ItemType)ResourceType, harvestAmount))
+            if (agent.AddItemToInventory((ItemType)ResourceType, harvestItemStack?.Amount ?? 0))
             {
                 // agent.beliefs.ModifyState("Has" + ResourceType.ToString(), harvestAmount);
-                agent.FeedbackText("+" + harvestAmount, color);
+                agent.FeedbackText("+" + harvestItemStack?.Amount, color);
 
                 return true;
             }
