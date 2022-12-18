@@ -85,12 +85,9 @@ public class BuildingManager : MonoBehaviourSingleton<BuildingManager>
     {
         Building closest = null;
 
-        Debug.Log("Buildings: " + Buildings.Count);
-
         // Get all buildings of the specified type
         foreach (Building building in Buildings)
         {
-            Debug.Log("BuildingType: " + building.BuildingType);
 
             if (building.BuildingType == buildingType)
             {
