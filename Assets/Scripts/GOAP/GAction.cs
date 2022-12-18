@@ -31,7 +31,7 @@ namespace GOAP.Actions
 
         // Name of the action
         public string actionName { get { return action?.actionName ?? ""; } }
-        
+
         // For game objects with tags
         public string targetTag { get { return action.targetTag; } }
         // Duration the action should take
@@ -94,6 +94,10 @@ namespace GOAP.Actions
         public bool PostPerform(GAgent agent)
         {
             bool preformad = action.PostPerform(agent, this);
+
+            if (!preformad)
+                return false;
+
             // trigger preformadAction event
             agent.OnActionPreformad(this);
             return preformad;

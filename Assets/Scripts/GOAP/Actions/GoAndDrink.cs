@@ -28,8 +28,7 @@ namespace GOAP.Actions
         {
             agent.State = Worker.States.Idle;
 
-            // TODO: Applay cost condations
-            ItemStack? itemStack = GlobalStorage.Inventory.GetItem(ItemType.Water, 40);
+            ItemStack? itemStack = GlobalStorage.Inventory.GetItem(ItemType.Water, action.costConditions[WorldStateTypes.Water]);
 
             if (itemStack == null)
             {

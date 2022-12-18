@@ -28,8 +28,7 @@ namespace GOAP.Actions
         {
             agent.State = Worker.States.Idle;
 
-            // TODO: Applay cost condations
-            ItemStack? itemStack = GlobalStorage.Inventory.GetItem(ItemType.Food, 60);
+            ItemStack? itemStack = GlobalStorage.Inventory.GetItem(ItemType.Food, action.costConditions[WorldStateTypes.Food]);
 
             if (itemStack == null)
             {

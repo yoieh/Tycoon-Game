@@ -1762,7 +1762,6 @@ MonoBehaviour:
   count: 100
   Resources:
   - {fileID: 11400000, guid: d223f177eaa7fbf4cb089dba44369aed, type: 2}
-  - {fileID: 11400000, guid: ce5ef6088d5fc6a48b0a0f0928fbca19, type: 2}
   - {fileID: 11400000, guid: a9f0b35d84dd58c478b9ff5240c6b687, type: 2}
   - {fileID: 11400000, guid: 33da58f9da94dea4f85ef9edd00694ca, type: 2}
   - {fileID: 11400000, guid: bab11b964ae02864aaa8d70042a705d2, type: 2}
