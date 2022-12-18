@@ -83,34 +83,10 @@ public class AgentStatDegadingSystem : BaseTickedSystem
            );
 
             // update beliefs
-            UpdateBeliefs(worker);
+            worker.UpdateBeliefs();
         }
 
     }
 
-    private void UpdateBeliefs(WorkerAgent worker)
-    {
-        if (worker.agentStats.Energy < 20)
-        {
-            worker.beliefs.SetState(WorldStateTypes.IsTired, 1);
-        }
 
-
-        if (worker.agentStats.Food < 20)
-        {
-            worker.beliefs.SetState(WorldStateTypes.IsHungry, 1);
-        }
-
-
-        if (worker.agentStats.Water < 20)
-        {
-            worker.beliefs.SetState(WorldStateTypes.IsThirsty, 1);
-        }
-
-
-        if (worker.agentStats.Happiness < 20)
-        {
-            worker.beliefs.SetState(WorldStateTypes.IsSad, 1);
-        }
-    }
 }

@@ -253,5 +253,31 @@ namespace GOAP
             return inventory.HasItem(itemType);
         }
 
+        public void UpdateBeliefs()
+        {
+            if (agentStats.Energy < 20)
+            {
+                beliefs.SetState(WorldStateTypes.IsTired, 1);
+            }
+
+
+            if (agentStats.Food < 20)
+            {
+                beliefs.SetState(WorldStateTypes.IsHungry, 1);
+            }
+
+
+            if (agentStats.Water < 20)
+            {
+                beliefs.SetState(WorldStateTypes.IsThirsty, 1);
+            }
+
+
+            if (agentStats.Happiness < 20)
+            {
+                beliefs.SetState(WorldStateTypes.IsSad, 1);
+            }
+        }
+
     }
 }
