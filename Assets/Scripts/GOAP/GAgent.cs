@@ -99,9 +99,10 @@ namespace GOAP
         void ComplateAction()
         {
             currentAction.running = false;
-            currentAction.PostPerform(this);
             invoked = false;
-            currentAction = null;
+
+            // if action was successful then remove current Action
+            if (currentAction.PostPerform(this)) currentAction = null;
         }
 
         // Update is called once per frame
@@ -159,11 +160,6 @@ namespace GOAP
                 currentAction = actionQueue.Dequeue();
                 if (currentAction.PrePerform(this))
                 {
-                    // if (currentAction.target == null && currentAction.targetTag != "")
-                    // {
-                    //     currentAction.target = GameObject.FindWithTag(currentAction.targetTag);
-                    // }
-
                     if (currentAction.target != null)
                     {
                         currentAction.destination = currentAction.target.transform.position;

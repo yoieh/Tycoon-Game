@@ -17,7 +17,7 @@ MonoBehaviour:
   duration: 2
   costConditions:
   - key: 21
-    value: 40
+    value: 100
   preConditions:
   - key: 19
     value: 1

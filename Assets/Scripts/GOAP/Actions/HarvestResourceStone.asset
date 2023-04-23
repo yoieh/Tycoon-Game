@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: HarvestResourceStone
   m_EditorClassIdentifier: 
   actionName: HarvestResourceStone
-  cost: 5
   targetTag: 
   duration: 10
   costConditions:
@@ -22,7 +21,7 @@ MonoBehaviour:
   - key: 18
     value: -2
   - key: 21
-    value: -3
+    value: -1
   preConditions: []
   afterEffects:
   - key: 8

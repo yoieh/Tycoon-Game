@@ -493,7 +493,7 @@ MonoBehaviour:
   _actions: []
   inventory:
     _alowedItemTypes: 000000000100000002000000030000000400000005000000
-    _maxAmount: 10
+    _maxAmount: 1000
   currentAction:
     target: {fileID: 0}
     destination: {x: 0, y: 0, z: 0}

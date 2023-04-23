@@ -33,8 +33,6 @@ namespace Systems
                 tickTimer = 0f;
                 tick++;
                 if (OnTick != null) OnTick(this, new OnTickEventArgs { tick = tick });
-                Debug.Log("Tick: " + tick);
-
             }
         }
 

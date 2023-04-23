@@ -30,7 +30,7 @@ namespace GOAP.Actions
 
             ItemStack? itemStack = GlobalStorage.Inventory.GetItem(ItemType.Food, action.costConditions[WorldStateTypes.Food]);
 
-            if (itemStack == null)
+            if (itemStack == null || itemStack?.Amount < action.costConditions[WorldStateTypes.Food])
             {
                 agent.FeedbackText("No food");
                 return false;

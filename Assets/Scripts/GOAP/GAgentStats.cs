@@ -62,11 +62,19 @@ namespace GOAP.Stats
 
         public void HealthIncrease(int health)
         {
+            if (this.health <= 0)
+            {
+                this.health = 0;
+                return;
+            }
+
             // modify healing according to each buff
             foreach (GBaseBuff buff in workerBuffs)
             {
                 health = buff.ModifyHealing(health);
             }
+
+
 
             // heal health
             this.health += health;
@@ -77,6 +85,12 @@ namespace GOAP.Stats
 
         public void HappinessIncrease(int happiness)
         {
+            if (this.happiness <= 0)
+            {
+                this.happiness = 0;
+                return;
+            }
+
             // modify happiness according to each buff
             foreach (GBaseBuff buff in workerBuffs)
             {
@@ -91,6 +105,12 @@ namespace GOAP.Stats
 
         public void EnergyIncrease(int energy)
         {
+            if (this.energy <= 0)
+            {
+                this.energy = 0;
+                return;
+            }
+
             // modify energy according to each buff
             foreach (GBaseBuff buff in workerBuffs)
             {
@@ -105,6 +125,12 @@ namespace GOAP.Stats
 
         public void WaterIncrease(int water)
         {
+            if (this.water <= 0)
+            {
+                this.water = 0;
+                return;
+            }
+
             // modify water according to each buff
             foreach (GBaseBuff buff in workerBuffs)
             {
@@ -119,6 +145,12 @@ namespace GOAP.Stats
 
         public void FoodIncrease(int food)
         {
+            if (this.food <= 0)
+            {
+                this.food = 0;
+                return;
+            }
+
             // modify food according to each buff
             foreach (GBaseBuff buff in workerBuffs)
             {

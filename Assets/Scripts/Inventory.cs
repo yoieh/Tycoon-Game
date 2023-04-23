@@ -81,8 +81,7 @@ public class Inventory
     public ItemStack? GetItem(ItemType itemType, int amount)
     {
         // Check Item Type - Returns false if not valid
-        if (!HasItem(itemType)) return null;
-
+        if (!HasItem(itemType, amount)) return null;
         if (_itemsSlots[itemType] < amount) amount = _itemsSlots[itemType].Amount;
 
         _itemsSlots[itemType] = _itemsSlots[itemType] - amount;
@@ -122,7 +121,7 @@ public class Inventory
 
         if (!_itemsSlots.ContainsKey(itemType)) return false;
 
-        return _itemsSlots[itemType] >= amount;
+        return _itemsSlots[itemType] >= 1; // amount;
     }
 
     public bool HasItem(ItemType itemType)
